@@ -1,0 +1,36 @@
+# Author: Marko Schrempf
+name: Test Action
+
+on:
+  push:
+    paths:
+      - action.yml
+  pull_request:
+    paths:
+      - action.yml
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Clone Diploma Thesis Repository
+        run: git clone https://github.com/HTL-Leoben/da-template
+
+      - name: Setup Folder Structure
+        run: mv da-template/* .
+
+      - name: Build And Send Diploma Thesis
+        uses: ./
+        with:
+          manual-mode: ${{ github.workspace }}
+          mail: ${{ secrets.SENDING_MAIL }}
+          mail-password: ${{ secrets.SENDING_MAIL_PASSWORD }}
+          smtp-server: ${{ secrets.SMTP_SERVER }}
+          smtp-port: ${{ secrets.SMTP_PORT }}
+          receiving-mail: ${{ secrets.RECEIVING_MAIL }}
+          mail-body: The Action 'Build and send diploma thesis' was successfully tested

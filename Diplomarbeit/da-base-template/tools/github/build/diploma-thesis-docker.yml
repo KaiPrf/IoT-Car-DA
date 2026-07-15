@@ -1,0 +1,93 @@
+# Author: Marko Schrempf
+name: Build and send diploma thesis
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - Diplomarbeit/**
+  workflow_dispatch:
+
+env:
+  DOCKERHUB_USERNAME: bytebang
+  DOCKERHUB_REPOSITORY: htlle-da-builder
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      timestamp: ${{ steps.timestamp.outputs.datetime }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Cache Docker Image
+        id: cache-docker
+        uses: actions/cache@v4
+        with:
+          path: /tmp/.docker
+          key: docker-${{ env.DOCKERHUB_USERNAME }}-${{ env.DOCKERHUB_REPOSITORY }}-${{ hashFiles('**/da-base-template/tools/docker/Dockerfile') }}
+          restore-keys: ${{ runner.os }}-docker-
+
+      - name: Create Docker Cache Directory
+        if: steps.cache-docker.outputs.cache-hit != 'true'
+        run: mkdir -p /tmp/.docker
+
+      - name: Load Cached Docker Image
+        if: steps.cache-docker.outputs.cache-hit == 'true'
+        run: docker load -i /tmp/.docker/image.tar
+
+      - name: Pull Docker Image
+        if: steps.cache-docker.outputs.cache-hit != 'true'
+        run: |
+          docker pull ${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_REPOSITORY }}
+          docker save ${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_REPOSITORY }} -o /tmp/.docker/image.tar
+
+      - name: Build Diploma Thesis
+        run: docker run -v ${{ github.workspace }}/Diplomarbeit:/workspace ${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_REPOSITORY }}
+
+      - name: Get UTC Timestamp
+        id: timestamp
+        run: echo "datetime=$(date -u +'%Y-%m-%dT%H-%MZ')" >> $GITHUB_OUTPUT
+
+      - name: Rename PDF With Timestamp
+        run: mv Diplomarbeit/diplomarbeit.pdf diplomarbeit-${{ steps.timestamp.outputs.datetime }}.pdf
+
+      - name: Upload Diploma Thesis
+        uses: actions/upload-artifact@v4
+        with:
+          name: diplomarbeit-${{ steps.timestamp.outputs.datetime }}
+          path: diplomarbeit-${{ steps.timestamp.outputs.datetime }}.pdf
+
+  send:
+    needs: build
+    if: success()
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Download Diploma Thesis
+        uses: actions/download-artifact@v4
+        with:
+          name: diplomarbeit-${{ needs.build.outputs.timestamp }}
+
+      - name: Extract Commit Message
+        id: message
+        run: echo "commit_message=$(git log -1 --pretty=%B)" >> $GITHUB_OUTPUT
+
+      - name: Send Diploma Thesis
+        uses: dawidd6/action-send-mail@v5
+        with:
+          username: ${{ secrets.SENDING_MAIL }}
+          password: ${{ secrets.SENDING_MAIL_PASSWORD }}
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          to: ${{ secrets.RECEIVING_MAIL }}
+          from: ${{ secrets.SENDING_MAIL }}
+          subject: "Diplomarbeit"
+          body: ${{ steps.message.outputs.commit_message }}
+          attachments: diplomarbeit-${{ needs.build.outputs.timestamp }}.pdf

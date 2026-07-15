@@ -1,0 +1,45 @@
+# Author: Marko Schrempf
+name: Git Time Reporter
+
+on:
+  workflow_dispatch:
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+
+    env:
+      TIME_CALCULATOR_PATH: Diplomarbeit/da-base-template/tools/time/time-reporter.py
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Get UTC Timestamp
+      id: timestamp
+      run: echo "datetime=$(date -u +'%Y-%m-%dT%H-%MZ')" >> $GITHUB_OUTPUT
+
+    - name: Set Up Python
+      uses: actions/setup-python@v6
+      with:
+        python-version: '3.x'
+
+    - name: Generate User Report
+      run: python $TIME_CALCULATOR_PATH -u -a -ef="user-report-${{ steps.timestamp.outputs.datetime }}.json"
+        
+    - name: Generate Issue Report
+      run: python $TIME_CALCULATOR_PATH -i -a -ef="issue-report-${{ steps.timestamp.outputs.datetime }}.json"
+
+    - name: Upload User Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: user-report-${{ steps.timestamp.outputs.datetime }}
+        path: user-report-${{ steps.timestamp.outputs.datetime }}.json
+
+    - name: Upload Issue Report
+      uses: actions/upload-artifact@v4
+      with:
+        name: issue-report-${{ steps.timestamp.outputs.datetime }}
+        path: issue-report-${{ steps.timestamp.outputs.datetime }}.json

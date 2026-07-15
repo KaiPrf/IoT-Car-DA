@@ -1,0 +1,19 @@
+{
+    "cSpell.words": [
+        "AHWIN",
+        "BHWIN",
+        "colour",
+        "colours"
+    ],
+    "cSpell.language": "en,de-de",
+    "todohighlight.keywords": [
+        "\\todo"
+    ],
+    "PandocCiter.RootFile": "Diplomarbeit/metadata.yaml",
+    "editor.tabCompletion": "on",
+    "docker": {
+        "username": "bytebang",
+        "repository": "htlle-da-builder",
+        "tag": "latest"
+    }
+}

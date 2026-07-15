@@ -1,0 +1,97 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Docker: Build PDF",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "run",
+        "-it",
+        "--rm",
+        "-e",
+        "TARGETS=pdf",
+        "-v",
+        "${workspaceFolder}/Diplomarbeit:/workspace",
+        "${config:docker.username}/${config:docker.repository}:${config:docker.tag}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+
+    {
+      "label": "Docker: Check Spelling",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "run",
+        "-it",
+        "--rm",
+        "-e",
+        "TARGETS=spellcheck",
+        "-v",
+        "${workspaceFolder}/Diplomarbeit:/workspace",
+        "${config:docker.username}/${config:docker.repository}:${config:docker.tag}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "group": {
+        "kind": "test"
+      }
+    },
+
+    {
+      "label": "Docker: Build Tex",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "run",
+        "-it",
+        "--rm",
+        "-e",
+        "TARGETS=tex",
+        "-v",
+        "${workspaceFolder}/Diplomarbeit:/workspace",
+        "${config:docker.username}/${config:docker.repository}:${config:docker.tag}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "group": {
+        "kind": "build"
+      }
+    },
+
+    {
+      "label": "Docker: Clean Directory",
+      "type": "shell",
+      "command": "docker",
+      "args": [
+        "run",
+        "-it",
+        "--rm",
+        "-e",
+        "TARGETS=clean",
+        "-v",
+        "${workspaceFolder}/Diplomarbeit:/workspace",
+        "${config:docker.username}/${config:docker.repository}:${config:docker.tag}"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [],
+      "group": {
+        "kind": "test"
+      }
+    }
+  ]
+}

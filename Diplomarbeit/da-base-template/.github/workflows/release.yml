@@ -1,0 +1,156 @@
+# Author: Marko Schrempf
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    types: [closed]
+
+permissions:
+  contents: write
+
+jobs:
+  changelog:
+    name: Changelog
+    if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.pull_request.merged == true)
+    runs-on: ubuntu-latest
+    outputs:
+      skipped: ${{ steps.changelog.outputs.skipped }}
+      tag: ${{ steps.changelog.outputs.tag }}
+      clean_changelog: ${{ steps.changelog.outputs.clean_changelog }}
+      version: ${{ steps.changelog.outputs.version }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create Changelog
+        uses: TriPSs/conventional-changelog-action@v6
+        id: changelog
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          git-user-name: "github-actions[bot]"
+          git-user-email: "github-actions[bot]@users.noreply.github.com"
+          skip-git-pull: true
+          skip-on-empty: true
+          preset: conventionalcommits
+          input-file: CHANGELOG.md
+          output-file: CHANGELOG.md
+          version-file: .github/version-info.yml
+
+  build:
+    name: Build Executables
+    needs: [changelog]
+    if: needs.changelog.outputs.skipped == 'false'
+    strategy:
+      matrix:
+        include:
+          - os: ubuntu-latest
+            executable_name: time-reporter-ln64
+            platform: linux
+          - os: macos-latest
+            executable_name: time-reporter-mac64
+            platform: macos
+          - os: windows-latest
+            executable_name: time-reporter-wn64.exe
+            platform: windows
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Set Up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      
+      - name: Install PyInstaller
+        run: pip install pyinstaller
+      
+      - name: Build Executable
+        run: pyinstaller --onefile --name ${{ matrix.executable_name }} tools/time/time-reporter.py
+      
+      - name: Upload Executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: executable-${{ matrix.platform }}
+          path: dist/${{ matrix.executable_name }}
+
+  package:
+    name: Package Release
+    needs: [changelog, build]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      
+      - name: Download Executables
+        uses: actions/download-artifact@v4
+        with:
+          path: executables
+      
+      - name: Prepare release directory
+        run: |
+          mkdir -p release/time-reporter
+          cp LICENSE release/time-reporter/
+          cp tools/time/README.md release/time-reporter/
+          cp tools/time/time-reporter.py release/time-reporter/
+          cp executables/executable-linux/time-reporter-ln64 release/time-reporter/
+          cp executables/executable-macos/time-reporter-mac64 release/time-reporter/
+          cp executables/executable-windows/time-reporter-wn64.exe release/time-reporter/
+          chmod +x release/time-reporter/time-reporter-ln64
+          chmod +x release/time-reporter/time-reporter-mac64
+      
+      - name: Create ZIP Archive
+        run: |
+          cd release
+          zip -r ../time-reporter.zip time-reporter
+
+      - name: Create TAR.GZ Archive
+        run: |
+          cd release
+          tar -czf ../time-reporter.tar.gz time-reporter
+
+      - name: Upload Archives
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-archives
+          path: |
+            time-reporter.zip
+            time-reporter.tar.gz
+
+  release:
+    name: Release
+    needs: [changelog, package]
+    if: needs.changelog.outputs.skipped == 'false'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Download Release Archives
+        uses: actions/download-artifact@v4
+        with:
+          name: release-archives
+          path: ./
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT }}
+        with:
+          tag_name: ${{ needs.changelog.outputs.tag }}
+          name: ${{ needs.changelog.outputs.tag }}
+          body: ${{ needs.changelog.outputs.clean_changelog }}
+          files: |
+            time-reporter.zip
+            time-reporter.tar.gz
