@@ -8,3 +8,4 @@ Die Zielsetzung beschreibt das allgemeine Ziel der Diplomarbeit. Dabei sollten f
 * Was ändert sich wenn Sie diese Arbeit schreiben ?
 
 Die konkreten Ausarbeitungen sind in den n- Unterfiles (je Schüler eines) abzubilden. 
+Test Commit
