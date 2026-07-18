@@ -1,7 +1,7 @@
 ---
 da-titel: Erstellen einer Diplomarbeit mit LaTex
 
-da-jahr: 2020/21 
+da-jahr: 2026 
 
 da-keywords: HTLLE, Keyword1, Keyword2, Keyword3
 
@@ -10,38 +10,10 @@ da-keywords: HTLLE, Keyword1, Keyword2, Keyword3
 bibliography: [literatur.bib]
 
 da-author:
-- vorname: Joltawan 
-  nachname: Barodscheff
-  klasse: 5AHWIN
-  thema: Bauen des LaTex Templates
-  ki-tools:
-  - name: ChatGPT3.5
-    zweck: Informationsbeschaffung
-  - name: Midjourney
-    zweck: Künstlerische Illustration
-
-- vorname: Craig 
-  nachname: Tester
-  klasse: 5AHWIN
-  thema: Entwicklung eines Prototypen
-  ki-tools:
-  - name: Github Copilot
-    zweck: Boilerplate codegenerierung, Codedokumentation
-
-- vorname: Karl 
-  nachname: Ranseier
-  klasse: 5AHWIN
-  thema: API-Mockups und Testen der Applikation
-
-- vorname: Frank 
-  nachname: Borland
-  klasse: 5AHWIN
-  thema: GUI Generierung
-  ki-tools:
-  - name: Galileo AI
-    zweck: Setendesign sowie UI/UX Design der App
-  - name: Grammarly Go
-    zweck: Stilverbesserung sowie Rechtschreibkorrekturen
+- vorname: Chloe
+  nachname: Pripfl
+  klasse: 5BHWIN
+  thema: 
 
 da-betreuer:
 - paraffe: hg
@@ -53,17 +25,6 @@ da-betreuer:
 da-kurzfassung-de: Hier kommt eine deutsche Kurzfassung hin.
 
 da-kurzfassung-en: Hier kommt eine englische Kurzfassung hin.
-
-
-da-kiquellen:
-- ki: ChatGPT4
-  short-prompt: Erklärung Pandoc
-  pdf-file: gpt-pandoc.pdf
-
-- ki: ChatGPT3.5
-  short-prompt: Aufbau eines Atoms
-  pdf-file: gpt-atom.pdf
-
 
 da-appendix:
 - abschnitt: Technische Dokumentation
