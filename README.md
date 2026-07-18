@@ -1,5 +1,2 @@
-# Diplomarbeit_{JAHR}: {Diplomarbeitsname}
-
-Hier kommit eine kurze Beschreibung Ihrer Diplomarbeit hin, damit die Besucher Ihres Repositories wissen worum es geht.
-
-Hilfe zu Benutzung dieses Templates finden Sie in der Datei [USAGE.md](USAGE.md)
+# Diplomarbeit_{2026}: {Emulierung eines 'IoT-Car' zur Durchführbarkeitsprüfung einer Steuerung über ein Handy}
+Innerhalb dieser Arbeit soll ein 'IoT-Car' der HTL-Leoben emuliert werden und dadurch getestet werden wie man Daten aus einem solchen 'IoT-Car' extrahieren, darstellen und über ein Handy dann auch steuern kann.
