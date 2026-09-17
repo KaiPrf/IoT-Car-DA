@@ -1,0 +1,402 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="iot_car">
+
+  <!-- ========================================================= -->
+  <!-- Zusätzliche Xacro-Dateien                                 -->
+  <!-- ========================================================= -->
+
+  <xacro:include filename="camera.xacro"/>
+
+
+  <!-- ========================================================= -->
+  <!-- Fahrzeugmaße                                              -->
+  <!-- x = vorne/hinten, y = links/rechts, z = oben/unten       -->
+  <!-- ========================================================= -->
+
+  <xacro:property name="body_length" value="0.40"/>
+  <xacro:property name="body_width" value="0.25"/>
+  <xacro:property name="body_height" value="0.08"/>
+
+  <xacro:property name="wheel_radius" value="0.05"/>
+  <xacro:property name="wheel_width" value="0.03"/>
+
+  <xacro:property name="front_x" value="0.13"/>
+  <xacro:property name="rear_x" value="-0.13"/>
+
+  <xacro:property name="left_y" value="0.14"/>
+  <xacro:property name="right_y" value="-0.14"/>
+
+  <xacro:property name="wheel_z" value="-0.04"/>
+
+
+  <!-- ========================================================= -->
+  <!-- Materialien                                               -->
+  <!-- ========================================================= -->
+
+  <material name="blue">
+    <color rgba="0.15 0.15 0.8 1.0"/>
+  </material>
+
+  <material name="black">
+    <color rgba="0.03 0.03 0.03 1.0"/>
+  </material>
+
+
+  <!-- ========================================================= -->
+  <!-- Chassis                                                   -->
+  <!-- ========================================================= -->
+
+  <link name="base_link">
+
+    <visual>
+      <geometry>
+        <box size="${body_length} ${body_width} ${body_height}"/>
+      </geometry>
+
+      <material name="blue"/>
+    </visual>
+
+    <collision>
+      <geometry>
+        <box size="${body_length} ${body_width} ${body_height}"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="1.0"/>
+
+      <inertia
+        ixx="0.00574"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.01387"
+        iyz="0.0"
+        izz="0.01854"/>
+    </inertial>
+
+  </link>
+
+
+  <!-- ========================================================= -->
+  <!-- Frontkamera                                               -->
+  <!-- ========================================================= -->
+
+  <xacro:front_camera parent="base_link"/>
+
+
+  <!-- ========================================================= -->
+  <!-- Rad-Makro                                                 -->
+  <!-- ========================================================= -->
+
+  <xacro:macro name="wheel_link" params="name">
+
+    <link name="${name}">
+
+      <visual>
+        <origin rpy="1.5708 0 0"/>
+
+        <geometry>
+          <cylinder
+            radius="${wheel_radius}"
+            length="${wheel_width}"/>
+        </geometry>
+
+        <material name="black"/>
+      </visual>
+
+      <collision>
+        <origin rpy="1.5708 0 0"/>
+
+        <geometry>
+          <cylinder
+            radius="${wheel_radius}"
+            length="${wheel_width}"/>
+        </geometry>
+      </collision>
+
+      <inertial>
+        <mass value="0.1"/>
+
+        <inertia
+          ixx="0.00007"
+          ixy="0.0"
+          ixz="0.0"
+          iyy="0.000125"
+          iyz="0.0"
+          izz="0.00007"/>
+      </inertial>
+
+    </link>
+
+  </xacro:macro>
+
+
+  <!-- ========================================================= -->
+  <!-- Vorderrad links                                           -->
+  <!-- ========================================================= -->
+
+  <link name="front_left_steering_link">
+
+    <inertial>
+      <mass value="0.02"/>
+
+      <inertia
+        ixx="0.00001"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.00001"
+        iyz="0.0"
+        izz="0.00001"/>
+    </inertial>
+
+  </link>
+
+  <joint name="front_left_steering_joint" type="revolute">
+
+    <parent link="base_link"/>
+    <child link="front_left_steering_link"/>
+
+    <origin xyz="${front_x} ${left_y} ${wheel_z}"/>
+
+    <axis xyz="0 0 1"/>
+
+    <limit
+      lower="-0.6"
+      upper="0.6"
+      effort="5.0"
+      velocity="2.0"/>
+
+    <dynamics damping="0.5"/>
+
+  </joint>
+
+  <xacro:wheel_link name="front_left_wheel"/>
+
+  <joint name="front_left_wheel_joint" type="continuous">
+
+    <parent link="front_left_steering_link"/>
+    <child link="front_left_wheel"/>
+
+    <axis xyz="0 1 0"/>
+
+    <dynamics damping="0.05"/>
+
+  </joint>
+
+
+  <!-- ========================================================= -->
+  <!-- Vorderrad rechts                                          -->
+  <!-- ========================================================= -->
+
+  <link name="front_right_steering_link">
+
+    <inertial>
+      <mass value="0.02"/>
+
+      <inertia
+        ixx="0.00001"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.00001"
+        iyz="0.0"
+        izz="0.00001"/>
+    </inertial>
+
+  </link>
+
+  <joint name="front_right_steering_joint" type="revolute">
+
+    <parent link="base_link"/>
+    <child link="front_right_steering_link"/>
+
+    <origin xyz="${front_x} ${right_y} ${wheel_z}"/>
+
+    <axis xyz="0 0 1"/>
+
+    <limit
+      lower="-0.6"
+      upper="0.6"
+      effort="5.0"
+      velocity="2.0"/>
+
+    <dynamics damping="0.5"/>
+
+  </joint>
+
+  <xacro:wheel_link name="front_right_wheel"/>
+
+  <joint name="front_right_wheel_joint" type="continuous">
+
+    <parent link="front_right_steering_link"/>
+    <child link="front_right_wheel"/>
+
+    <axis xyz="0 1 0"/>
+
+    <dynamics damping="0.05"/>
+
+  </joint>
+
+
+  <!-- ========================================================= -->
+  <!-- Hinterrad links                                           -->
+  <!-- ========================================================= -->
+
+  <xacro:wheel_link name="rear_left_wheel"/>
+
+  <joint name="rear_left_wheel_joint" type="continuous">
+
+    <parent link="base_link"/>
+    <child link="rear_left_wheel"/>
+
+    <origin xyz="${rear_x} ${left_y} ${wheel_z}"/>
+
+    <axis xyz="0 1 0"/>
+
+    <dynamics damping="0.05"/>
+
+  </joint>
+
+
+  <!-- ========================================================= -->
+  <!-- Hinterrad rechts                                          -->
+  <!-- ========================================================= -->
+
+  <xacro:wheel_link name="rear_right_wheel"/>
+
+  <joint name="rear_right_wheel_joint" type="continuous">
+
+    <parent link="base_link"/>
+    <child link="rear_right_wheel"/>
+
+    <origin xyz="${rear_x} ${right_y} ${wheel_z}"/>
+
+    <axis xyz="0 1 0"/>
+
+    <dynamics damping="0.05"/>
+
+  </joint>
+
+
+  <!-- ========================================================= -->
+  <!-- ROS 2 Control                                             -->
+  <!-- ========================================================= -->
+
+  <ros2_control name="GazeboSimSystem" type="system">
+
+    <hardware>
+      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+    </hardware>
+
+    <joint name="rear_right_wheel_joint">
+
+      <command_interface name="velocity"/>
+
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+
+    </joint>
+
+    <joint name="rear_left_wheel_joint">
+
+      <command_interface name="velocity"/>
+
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+
+    </joint>
+
+    <joint name="front_right_steering_joint">
+
+      <command_interface name="position">
+        <param name="min">-0.6</param>
+        <param name="max">0.6</param>
+      </command_interface>
+
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+
+    </joint>
+
+    <joint name="front_left_steering_joint">
+
+      <command_interface name="position">
+        <param name="min">-0.6</param>
+        <param name="max">0.6</param>
+      </command_interface>
+
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+
+    </joint>
+
+    <joint name="front_right_wheel_joint">
+
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+
+    </joint>
+
+    <joint name="front_left_wheel_joint">
+
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+
+    </joint>
+
+  </ros2_control>
+
+
+  <!-- ========================================================= -->
+  <!-- Gazebo ROS 2 Control Plugin                               -->
+  <!-- ========================================================= -->
+
+  <gazebo>
+
+    <plugin
+      filename="libgz_ros2_control-system.so"
+      name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+
+      <parameters>
+        $(find iot_car_description)/config/iot_car_controllers.yaml
+      </parameters>
+
+    </plugin>
+
+  </gazebo>
+
+
+  <!-- ========================================================= -->
+  <!-- Ground-Truth-Fahrzeugposition                             -->
+  <!-- ========================================================= -->
+
+  <gazebo>
+
+    <plugin
+      filename="gz-sim-pose-publisher-system"
+      name="gz::sim::systems::PosePublisher">
+
+      <publish_link_pose>false</publish_link_pose>
+
+      <publish_visual_pose>false</publish_visual_pose>
+
+      <publish_collision_pose>false</publish_collision_pose>
+
+      <publish_sensor_pose>false</publish_sensor_pose>
+
+      <publish_model_pose>true</publish_model_pose>
+
+      <publish_nested_model_pose>false</publish_nested_model_pose>
+
+      <use_pose_vector_msg>false</use_pose_vector_msg>
+
+      <update_frequency>30</update_frequency>
+
+      <topic>/car/ground_truth_pose</topic>
+
+    </plugin>
+
+  </gazebo>
+
+
+</robot>

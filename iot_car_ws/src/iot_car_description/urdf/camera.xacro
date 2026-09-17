@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="front_camera" params="parent">
+
+    <!-- ======================================================= -->
+    <!-- Kamera-Gehäuse                                         -->
+    <!-- ======================================================= -->
+
+    <link name="camera_link">
+
+      <visual>
+        <geometry>
+          <box size="0.035 0.05 0.035"/>
+        </geometry>
+
+        <material name="camera_black">
+          <color rgba="0.05 0.05 0.05 1.0"/>
+        </material>
+      </visual>
+
+      <collision>
+        <geometry>
+          <box size="0.035 0.05 0.035"/>
+        </geometry>
+      </collision>
+
+      <inertial>
+        <mass value="0.02"/>
+
+        <inertia
+          ixx="0.00001"
+          ixy="0.0"
+          ixz="0.0"
+          iyy="0.00001"
+          iyz="0.0"
+          izz="0.00001"/>
+      </inertial>
+
+    </link>
+
+
+    <!-- ======================================================= -->
+    <!-- Kamera fest mit Chassis verbinden                      -->
+    <!-- ======================================================= -->
+
+    <joint name="camera_joint" type="fixed">
+
+      <parent link="${parent}"/>
+      <child link="camera_link"/>
+
+      <origin xyz="0.205 0 0.055" rpy="0 0 0"/>
+
+    </joint>
+
+
+    <!-- ======================================================= -->
+    <!-- Gazebo Kamera                                           -->
+    <!-- ======================================================= -->
+
+    <gazebo reference="camera_link">
+
+      <sensor name="front_camera" type="camera">
+
+        <topic>/car/camera/image</topic>
+
+        <update_rate>15</update_rate>
+
+        <always_on>true</always_on>
+
+        <visualize>false</visualize>
+
+        <camera>
+
+          <horizontal_fov>1.047</horizontal_fov>
+
+          <image>
+            <width>640</width>
+            <height>360</height>
+            <format>R8G8B8</format>
+          </image>
+
+          <clip>
+            <near>0.05</near>
+            <far>20.0</far>
+          </clip>
+
+          <camera_info_topic>
+            /car/camera/camera_info
+          </camera_info_topic>
+
+        </camera>
+
+      </sensor>
+
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>

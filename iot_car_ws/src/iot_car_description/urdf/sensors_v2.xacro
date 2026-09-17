@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <!-- Frontbumper -->
+  <link name="front_bumper_link">
+
+    <visual>
+      <geometry>
+        <box size="0.04 0.22 0.04"/>
+      </geometry>
+
+      <material name="BumperBlack">
+        <color rgba="0.05 0.05 0.05 1.0"/>
+      </material>
+    </visual>
+
+    <collision>
+      <geometry>
+        <box size="0.04 0.22 0.04"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="0.08"/>
+
+      <inertia
+        ixx="0.00035"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.00002"
+        iyz="0.0"
+        izz="0.00036"/>
+    </inertial>
+
+  </link>
+
+  <joint name="front_bumper_joint" type="fixed">
+
+    <parent link="base_link"/>
+    <child link="front_bumper_link"/>
+
+    <origin
+      xyz="0.31 0 0.025"
+      rpy="0 0 0"/>
+
+  </joint>
+
+
+  <!-- Front-Abstandssensor -->
+  <link name="front_sensor_link">
+
+    <visual>
+      <geometry>
+        <box size="0.018 0.028 0.018"/>
+      </geometry>
+
+      <material name="SensorBlack">
+        <color rgba="0.04 0.04 0.04 1.0"/>
+      </material>
+    </visual>
+
+    <inertial>
+      <mass value="0.02"/>
+
+      <inertia
+        ixx="0.000005"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.000005"
+        iyz="0.0"
+        izz="0.000005"/>
+    </inertial>
+
+  </link>
+
+  <joint name="front_sensor_joint" type="fixed">
+
+    <parent link="base_link"/>
+    <child link="front_sensor_link"/>
+
+    <origin
+      xyz="0.285 0 0.055"
+      rpy="0 0 0"/>
+
+  </joint>
+
+
+  <!-- Abstandsmessung -->
+  <gazebo reference="front_sensor_link">
+
+    <sensor name="front_distance_sensor" type="gpu_lidar">
+
+      <always_on>true</always_on>
+      <update_rate>20</update_rate>
+
+      <topic>/car/front_scan</topic>
+
+      <lidar>
+
+        <scan>
+          <horizontal>
+            <samples>9</samples>
+            <resolution>1</resolution>
+            <min_angle>-0.12</min_angle>
+            <max_angle>0.12</max_angle>
+          </horizontal>
+        </scan>
+
+        <range>
+          <min>0.03</min>
+          <max>4.0</max>
+          <resolution>0.005</resolution>
+        </range>
+
+      </lidar>
+
+      <visualize>false</visualize>
+
+    </sensor>
+
+  </gazebo>
+
+</robot>

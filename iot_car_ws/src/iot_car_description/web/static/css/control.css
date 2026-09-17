@@ -1,0 +1,561 @@
+.control-body {
+    margin: 0;
+
+    background: #0d0e11;
+    color: #eeeeee;
+
+    user-select: none;
+}
+
+.control-page {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Kopfbereich */
+
+.control-header {
+    min-height: 58px;
+
+    padding: 9px 16px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: #181a20;
+
+    border-bottom: 1px solid #30333c;
+}
+
+.control-header > div:first-child {
+    display: flex;
+    flex-direction: column;
+}
+
+.control-header span {
+    color: #9fa4af;
+
+    font-size: 13px;
+}
+
+.header-status {
+    display: flex;
+    gap: 8px;
+}
+
+.connection {
+    padding: 7px 10px;
+
+    border-radius: 7px;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.connected {
+    background: #183c25;
+    color: #78df94;
+}
+
+.disconnected {
+    background: #482020;
+    color: #ff8686;
+}
+
+
+/* PC */
+
+.desktop-control {
+    flex: 1;
+
+    padding: 24px;
+
+    display: flex;
+    justify-content: center;
+}
+
+.desktop-layout {
+    width: min(1050px, 100%);
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.5fr)
+        minmax(300px, 0.5fr);
+
+    gap: 20px;
+}
+
+.camera-card {
+    aspect-ratio: 16 / 9;
+
+    background: black;
+
+    border: 1px solid #30333c;
+    border-radius: 14px;
+
+    overflow: hidden;
+}
+
+.camera-canvas {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+}
+
+.desktop-telemetry {
+    margin-top: 12px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr;
+
+    gap: 10px;
+}
+
+.desktop-telemetry div {
+    padding: 14px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+
+    background: #181a20;
+
+    border: 1px solid #30333c;
+    border-radius: 10px;
+}
+
+.desktop-telemetry span {
+    color: #969ba6;
+
+    font-size: 12px;
+}
+
+.desktop-telemetry strong {
+    font-size: 20px;
+}
+
+.desktop-panel {
+    padding: 24px;
+
+    background: #181a20;
+
+    border: 1px solid #30333c;
+    border-radius: 14px;
+}
+
+.desktop-panel h1 {
+    margin-top: 0;
+}
+
+.desktop-hint {
+    color: #969ba6;
+}
+
+.key-group {
+    margin-top: 30px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    gap: 8px;
+}
+
+.key-row {
+    display: flex;
+    gap: 8px;
+}
+
+.key {
+    width: 60px;
+    height: 60px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #252832;
+
+    border: 1px solid #484c58;
+    border-radius: 9px;
+
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.key.active {
+    background: #3d70d9;
+
+    transform: translateY(2px);
+}
+
+.space-key {
+    margin-top: 28px;
+
+    min-height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #252832;
+
+    border: 1px solid #484c58;
+    border-radius: 9px;
+
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.space-key.active {
+    background: #8a2929;
+}
+
+
+/* Handy */
+
+.touch-control {
+    display: none;
+
+    flex: 1;
+
+    min-height: 0;
+
+    touch-action: none;
+}
+
+.touch-stage {
+    position: relative;
+
+    flex: 1;
+
+    width: 100%;
+    min-height: 0;
+
+    overflow: hidden;
+
+    background: black;
+
+    touch-action: none;
+}
+
+.touch-camera {
+    position: absolute;
+
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    background: black;
+}
+
+
+/* Fullscreen */
+
+.fullscreen-button {
+    position: absolute;
+
+    top: 12px;
+    left: 12px;
+
+    z-index: 50;
+
+    min-width: 105px;
+    min-height: 46px;
+
+    padding: 0 14px;
+
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 9px;
+
+    background: rgba(10, 12, 16, 0.86);
+    color: white;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    touch-action: manipulation;
+}
+
+
+/* Sensordaten */
+
+.sensor-hud {
+    position: absolute;
+
+    top: 12px;
+    right: 12px;
+
+    z-index: 20;
+
+    display: flex;
+
+    gap: 8px;
+}
+
+.sensor-hud div {
+    min-width: 105px;
+
+    padding: 8px 11px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: rgba(15, 17, 22, 0.76);
+
+    border-radius: 8px;
+
+    backdrop-filter: blur(3px);
+}
+
+.sensor-hud span {
+    color: #afb3bd;
+
+    font-size: 9px;
+}
+
+.sensor-hud strong {
+    margin-top: 2px;
+
+    color: white;
+
+    font-size: 17px;
+}
+
+
+/* Lenkung */
+
+.steering-pad {
+    position: absolute;
+
+    left: 3%;
+    bottom: 5%;
+
+    width: 48%;
+    height: 110px;
+
+    z-index: 20;
+
+    background: rgba(18, 20, 26, 0.68);
+
+    border: 1px solid rgba(220, 220, 225, 0.40);
+    border-radius: 18px;
+
+    touch-action: none;
+
+    backdrop-filter: blur(3px);
+}
+
+.steering-label {
+    position: absolute;
+
+    top: 12px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    color: rgba(230, 232, 237, 0.65);
+
+    font-size: 11px;
+    font-weight: bold;
+
+    letter-spacing: 2px;
+}
+
+.steering-track {
+    position: absolute;
+
+    left: 7%;
+    right: 7%;
+
+    top: 63%;
+
+    height: 6px;
+
+    transform: translateY(-50%);
+
+    background: rgba(215, 218, 225, 0.38);
+
+    border-radius: 4px;
+}
+
+.steering-track::after {
+    content: "";
+
+    position: absolute;
+
+    left: 50%;
+    top: -11px;
+
+    width: 2px;
+    height: 28px;
+
+    background: rgba(245, 245, 247, 0.45);
+}
+
+.steering-marker {
+    position: absolute;
+
+    left: 50%;
+    top: 63%;
+
+    width: 38px;
+    height: 38px;
+
+    transform:
+        translate(-50%, -50%);
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 0 0 5px
+        rgba(255, 255, 255, 0.14);
+
+    pointer-events: none;
+}
+
+
+/* Pedale */
+
+.pedal-section {
+    position: absolute;
+
+    right: 3%;
+    bottom: 5%;
+
+    z-index: 20;
+
+    display: flex;
+
+    gap: 10px;
+}
+
+.pedal {
+    width: 84px;
+    height: 120px;
+
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 18px;
+
+    color: white;
+
+    font-size: 15px;
+    font-weight: bold;
+
+    touch-action: none;
+}
+
+.gas {
+    background: rgba(23, 107, 56, 0.82);
+}
+
+.brake {
+    background: rgba(138, 41, 41, 0.82);
+}
+
+.pedal.active {
+    transform: scale(0.96);
+
+    filter: brightness(1.35);
+}
+
+
+/* Modi */
+
+.desktop-mode .desktop-control {
+    display: flex;
+}
+
+.desktop-mode .touch-control {
+    display: none;
+}
+
+.touch-mode {
+    overflow: hidden;
+}
+
+.touch-mode .control-page {
+    height: 100vh;
+    min-height: 100vh;
+
+    overflow: hidden;
+}
+
+.touch-mode .desktop-control {
+    display: none;
+}
+
+.touch-mode .touch-control {
+    display: flex;
+}
+
+.touch-mode .control-footer {
+    display: none;
+}
+
+
+/* Echter Fullscreen */
+
+:fullscreen .control-header {
+    display: none;
+}
+
+:fullscreen .touch-stage {
+    width: 100vw;
+    height: 100vh;
+}
+
+:fullscreen .touch-control {
+    display: flex;
+}
+
+:fullscreen .control-page {
+    width: 100vw;
+    height: 100vh;
+}
+
+
+/* Fußbereich */
+
+.control-footer {
+    min-height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 13px;
+}
+
+.control-footer a {
+    color: #aeb4c0;
+
+    text-decoration: none;
+}
+
+
+@media (max-width: 850px) {
+
+    .desktop-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .connection {
+        font-size: 10px;
+    }
+}

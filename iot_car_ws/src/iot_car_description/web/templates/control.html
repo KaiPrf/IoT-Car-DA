@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    >
+
+    <title>IoT-Car Steuerung</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/common.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/static/css/control.css"
+    >
+</head>
+
+<body class="control-body desktop-mode">
+
+    <main class="control-page">
+
+        <header class="control-header">
+
+            <div>
+                <strong>IoT-Car</strong>
+
+                <span id="control-mode">
+                    PC-Steuerung
+                </span>
+            </div>
+
+            <div class="header-status">
+
+                <div
+                    id="camera-status"
+                    class="connection disconnected"
+                >
+                    Kamera getrennt
+                </div>
+
+                <div
+                    id="connection-status"
+                    class="connection disconnected"
+                >
+                    Steuerung getrennt
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- PC-Steuerung -->
+        <section
+            id="desktop-control"
+            class="desktop-control"
+        >
+
+            <div class="desktop-layout">
+
+                <div>
+
+                    <div class="camera-card">
+
+                        <canvas
+                            id="desktop-camera"
+                            class="camera-canvas"
+                        ></canvas>
+
+                    </div>
+
+                    <div class="desktop-telemetry">
+
+                        <div>
+                            <span>Geschwindigkeit</span>
+
+                            <strong id="desktop-speed">
+                                -- km/h
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>Abstand vorne</span>
+
+                            <strong id="desktop-distance">
+                                --
+                            </strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="desktop-panel">
+
+                    <h1>PC-Steuerung</h1>
+
+                    <p class="desktop-hint">
+                        WASD oder Pfeiltasten
+                    </p>
+
+                    <div class="key-group">
+
+                        <div class="key-row">
+                            <div id="key-w" class="key">W</div>
+                        </div>
+
+                        <div class="key-row">
+                            <div id="key-a" class="key">A</div>
+                            <div id="key-s" class="key">S</div>
+                            <div id="key-d" class="key">D</div>
+                        </div>
+
+                    </div>
+
+                    <div
+                        id="space-key"
+                        class="space-key"
+                    >
+                        LEERTASTE – SOFORT-STOPP
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- Handy-Steuerung -->
+        <section
+            id="touch-control"
+            class="touch-control"
+        >
+
+            <div
+                id="touch-stage"
+                class="touch-stage"
+            >
+
+                <canvas
+                    id="touch-camera"
+                    class="touch-camera"
+                ></canvas>
+
+
+                <button
+                    id="fullscreen-button"
+                    class="fullscreen-button"
+                    type="button"
+                >
+                    ⛶ VOLLBILD
+                </button>
+
+
+                <div class="sensor-hud">
+
+                    <div>
+                        <span>GESCHWINDIGKEIT</span>
+
+                        <strong>
+                            <span id="touch-speed">--</span>
+                            km/h
+                        </strong>
+                    </div>
+
+                    <div>
+                        <span>ABSTAND</span>
+
+                        <strong id="touch-distance">
+                            --
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="steering-pad"
+                    class="steering-pad"
+                >
+
+                    <span class="steering-label">
+                        LENKUNG
+                    </span>
+
+                    <div class="steering-track"></div>
+
+                    <div
+                        id="steering-marker"
+                        class="steering-marker"
+                    ></div>
+
+                </div>
+
+
+                <div class="pedal-section">
+
+                    <button
+                        id="gas-button"
+                        class="pedal gas"
+                        type="button"
+                    >
+                        GAS
+                    </button>
+
+                    <button
+                        id="brake-button"
+                        class="pedal brake"
+                        type="button"
+                    >
+                        BREMSE
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <footer class="control-footer">
+
+            <a href="/info">
+                Zur Info-Seite
+            </a>
+
+        </footer>
+
+    </main>
+
+    <script src="/static/js/control.js"></script>
+
+</body>
+
+</html>

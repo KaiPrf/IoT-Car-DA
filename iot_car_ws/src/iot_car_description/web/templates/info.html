@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>IoT-Car Simulation</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/common.css"
+    >
+</head>
+
+<body>
+
+    <main class="page">
+
+        <section class="panel">
+
+            <h1>IoT-Car Simulation</h1>
+
+            <p class="subtitle">
+                ROS 2 / Gazebo Fahrzeug-Simulation
+            </p>
+
+            <div class="status-grid">
+
+                <div class="status-item">
+                    <span>Webserver</span>
+
+                    <strong class="ok">
+                        Online
+                    </strong>
+                </div>
+
+                <div class="status-item">
+                    <span>Port</span>
+
+                    <strong id="port">
+                        -
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <section class="panel">
+
+            <h2>PC-Steuerung</h2>
+
+            <a
+                class="primary-button"
+                href="/control"
+            >
+                PC-Steuerung öffnen
+            </a>
+
+            <p class="hint">
+                Steuerung über WASD oder die Pfeiltasten.
+            </p>
+
+        </section>
+
+
+        <section class="panel">
+
+            <h2>Handy-Steuerung</h2>
+
+            <div class="network-grid">
+
+                <div class="url-box">
+
+                    <span>Netzwerk</span>
+
+                    <strong id="network-name">
+                        Wird ermittelt ...
+                    </strong>
+
+                </div>
+
+                <div class="url-box">
+
+                    <span>PC-IP</span>
+
+                    <strong id="host-ip">
+                        Wird ermittelt ...
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <p class="network-message">
+                Das Handy muss sich im selben
+                Netzwerk wie dieser PC befinden.
+            </p>
+
+            <div class="phone-connect">
+
+                <div class="url-box">
+
+                    <span>
+                        Adresse am Handy
+                    </span>
+
+                    <strong id="control-url">
+                        Wird ermittelt ...
+                    </strong>
+
+                </div>
+
+                <div class="qr-container">
+
+                    <img
+                        id="control-qr"
+                        src="/api/qr.png"
+                        alt="QR-Code zur Handy-Steuerung"
+                    >
+
+                </div>
+
+            </div>
+
+            <p class="hint">
+                QR-Code scannen oder die Adresse
+                direkt am Handy öffnen.
+            </p>
+
+        </section>
+
+    </main>
+
+    <script src="/static/js/info.js"></script>
+
+</body>
+
+</html>

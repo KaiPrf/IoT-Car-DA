@@ -1,0 +1,57 @@
+# Controller-Grundeinstellungen
+controller_manager:
+  ros__parameters:
+    update_rate: 100
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+
+# Ackermann-Fahrzeugsteuerung
+ackermann_steering_controller:
+  ros__parameters:
+    type: ackermann_steering_controller/AckermannSteeringController
+
+    wheelbase: 0.26
+
+    traction_track_width: 0.21
+    steering_track_width: 0.21
+
+    traction_wheels_radius: 0.055
+    steering_wheels_radius: 0.055
+
+    traction_joints_names:
+      - rear_right_wheel_joint
+      - rear_left_wheel_joint
+
+    steering_joints_names:
+      - right_wheel_steering_joint
+      - left_wheel_steering_joint
+
+    reference_timeout: 0.30
+
+    open_loop: false
+    position_feedback: false
+
+    velocity_rolling_window_size: 5
+
+    base_frame_id: base_link
+    odom_frame_id: odom
+
+    enable_odom_tf: true
+
+    twist_covariance_diagonal:
+      - 0.001
+      - 0.001
+      - 0.001
+      - 0.001
+      - 0.001
+      - 0.001
+
+    pose_covariance_diagonal:
+      - 0.001
+      - 0.001
+      - 0.001
+      - 0.001
+      - 0.001
+      - 0.001

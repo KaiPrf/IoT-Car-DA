@@ -1,0 +1,28 @@
+services:
+
+  iot-car:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    image: iot-car-sim:latest
+
+    container_name: iot-car-sim
+
+    gpus: all
+
+    ports:
+      - "8080:8080"
+
+    environment:
+      IOT_CAR_HOST_IP: "${IOT_CAR_HOST_IP:-localhost}"
+      IOT_CAR_NETWORK_NAME: "${IOT_CAR_NETWORK_NAME:-Docker}"
+
+      NVIDIA_VISIBLE_DEVICES: "all"
+      NVIDIA_DRIVER_CAPABILITIES: "all"
+
+      ROS_DOMAIN_ID: "0"
+
+    shm_size: "512m"
+
+    stop_grace_period: 10s

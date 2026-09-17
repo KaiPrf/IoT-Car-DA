@@ -1,0 +1,424 @@
+<?xml version="1.0"?>
+
+<robot
+  name="iot_car_v2"
+  xmlns:xacro="http://www.ros.org/wiki/xacro">
+  <xacro:include filename="camera_v2.xacro"/>
+  <xacro:include filename="sensors_v2.xacro"/>
+
+  <!-- Fahrzeugabmessungen -->
+  <xacro:property name="wheelbase" value="0.26"/>
+  <xacro:property name="track_width" value="0.21"/>
+  <xacro:property name="wheel_radius" value="0.055"/>
+  <xacro:property name="wheel_width" value="0.040"/>
+
+  <xacro:property name="chassis_length" value="0.34"/>
+  <xacro:property name="chassis_width" value="0.20"/>
+  <xacro:property name="chassis_height" value="0.07"/>
+
+  <xacro:property name="chassis_center_x" value="0.13"/>
+  <xacro:property name="chassis_center_z" value="0.035"/>
+
+  <xacro:property name="left_y" value="${track_width / 2.0}"/>
+  <xacro:property name="right_y" value="${-track_width / 2.0}"/>
+
+
+  <!-- Materialien -->
+  <material name="BodyBlue">
+    <color rgba="0.10 0.20 0.80 1.0"/>
+  </material>
+
+  <material name="WheelBlack">
+    <color rgba="0.03 0.03 0.03 1.0"/>
+  </material>
+
+
+  <!-- Fahrzeugkörper -->
+  <link name="base_link">
+
+    <visual>
+      <origin xyz="${chassis_center_x} 0 ${chassis_center_z}"/>
+
+      <geometry>
+        <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+      </geometry>
+
+      <material name="BodyBlue"/>
+    </visual>
+
+    <collision>
+      <origin xyz="${chassis_center_x} 0 ${chassis_center_z}"/>
+
+      <geometry>
+        <box size="${chassis_length} ${chassis_width} ${chassis_height}"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <origin xyz="${chassis_center_x} 0 ${chassis_center_z}"/>
+
+      <mass value="3.0"/>
+
+      <inertia
+        ixx="0.01123"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.03013"
+        iyz="0.0"
+        izz="0.03890"/>
+    </inertial>
+
+  </link>
+
+
+  <!-- Hinterräder -->
+  <link name="rear_left_wheel">
+
+    <visual>
+      <geometry>
+        <cylinder
+          radius="${wheel_radius}"
+          length="${wheel_width}"/>
+      </geometry>
+
+      <material name="WheelBlack"/>
+    </visual>
+
+    <collision>
+      <geometry>
+        <cylinder
+          radius="${wheel_radius}"
+          length="${wheel_width}"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="0.18"/>
+
+      <inertia
+        ixx="0.000160"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.000160"
+        iyz="0.0"
+        izz="0.000272"/>
+    </inertial>
+
+  </link>
+
+  <joint
+    name="rear_left_wheel_joint"
+    type="continuous">
+
+    <parent link="base_link"/>
+    <child link="rear_left_wheel"/>
+
+    <origin
+      xyz="0 ${left_y} 0"
+      rpy="-1.57079632679 0 0"/>
+
+    <axis xyz="0 0 1"/>
+
+    <dynamics damping="0.001"/>
+
+  </joint>
+
+
+  <link name="rear_right_wheel">
+
+    <visual>
+      <geometry>
+        <cylinder
+          radius="${wheel_radius}"
+          length="${wheel_width}"/>
+      </geometry>
+
+      <material name="WheelBlack"/>
+    </visual>
+
+    <collision>
+      <geometry>
+        <cylinder
+          radius="${wheel_radius}"
+          length="${wheel_width}"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="0.18"/>
+
+      <inertia
+        ixx="0.000160"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.000160"
+        iyz="0.0"
+        izz="0.000272"/>
+    </inertial>
+
+  </link>
+
+  <joint
+    name="rear_right_wheel_joint"
+    type="continuous">
+
+    <parent link="base_link"/>
+    <child link="rear_right_wheel"/>
+
+    <origin
+      xyz="0 ${right_y} 0"
+      rpy="-1.57079632679 0 0"/>
+
+    <axis xyz="0 0 1"/>
+
+    <dynamics damping="0.001"/>
+
+  </joint>
+
+
+  <!-- Vorderachslenkung -->
+  <link name="left_wheel_steering">
+
+    <inertial>
+      <mass value="0.05"/>
+
+      <inertia
+        ixx="0.0001"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.0001"
+        iyz="0.0"
+        izz="0.0001"/>
+    </inertial>
+
+  </link>
+
+  <joint
+    name="left_wheel_steering_joint"
+    type="revolute">
+
+    <parent link="base_link"/>
+    <child link="left_wheel_steering"/>
+
+    <origin
+      xyz="${wheelbase} ${left_y} 0"
+      rpy="0 0 0"/>
+
+    <axis xyz="0 0 1"/>
+
+    <limit
+      lower="-0.55"
+      upper="0.55"
+      effort="20.0"
+      velocity="8.0"/>
+
+    <dynamics damping="0.10"/>
+
+  </joint>
+
+
+  <link name="right_wheel_steering">
+
+    <inertial>
+      <mass value="0.05"/>
+
+      <inertia
+        ixx="0.0001"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.0001"
+        iyz="0.0"
+        izz="0.0001"/>
+    </inertial>
+
+  </link>
+
+  <joint
+    name="right_wheel_steering_joint"
+    type="revolute">
+
+    <parent link="base_link"/>
+    <child link="right_wheel_steering"/>
+
+    <origin
+      xyz="${wheelbase} ${right_y} 0"
+      rpy="0 0 0"/>
+
+    <axis xyz="0 0 1"/>
+
+    <limit
+      lower="-0.55"
+      upper="0.55"
+      effort="20.0"
+      velocity="8.0"/>
+
+    <dynamics damping="0.10"/>
+
+  </joint>
+
+
+  <!-- Vorderräder -->
+  <link name="front_left_wheel">
+
+    <visual>
+      <geometry>
+        <cylinder
+          radius="${wheel_radius}"
+          length="${wheel_width}"/>
+      </geometry>
+
+      <material name="WheelBlack"/>
+    </visual>
+
+    <collision>
+      <geometry>
+        <cylinder
+          radius="${wheel_radius}"
+          length="${wheel_width}"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="0.18"/>
+
+      <inertia
+        ixx="0.000160"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.000160"
+        iyz="0.0"
+        izz="0.000272"/>
+    </inertial>
+
+  </link>
+
+  <joint
+    name="front_left_wheel_joint"
+    type="continuous">
+
+    <parent link="left_wheel_steering"/>
+    <child link="front_left_wheel"/>
+
+    <origin
+      xyz="0 0 0"
+      rpy="-1.57079632679 0 0"/>
+
+    <axis xyz="0 0 1"/>
+
+    <dynamics damping="0.001"/>
+
+  </joint>
+
+
+  <link name="front_right_wheel">
+
+    <visual>
+      <geometry>
+        <cylinder
+          radius="${wheel_radius}"
+          length="${wheel_width}"/>
+      </geometry>
+
+      <material name="WheelBlack"/>
+    </visual>
+
+    <collision>
+      <geometry>
+        <cylinder
+          radius="${wheel_radius}"
+          length="${wheel_width}"/>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass value="0.18"/>
+
+      <inertia
+        ixx="0.000160"
+        ixy="0.0"
+        ixz="0.0"
+        iyy="0.000160"
+        iyz="0.0"
+        izz="0.000272"/>
+    </inertial>
+
+  </link>
+
+  <joint
+    name="front_right_wheel_joint"
+    type="continuous">
+
+    <parent link="right_wheel_steering"/>
+    <child link="front_right_wheel"/>
+
+    <origin
+      xyz="0 0 0"
+      rpy="-1.57079632679 0 0"/>
+
+    <axis xyz="0 0 1"/>
+
+    <dynamics damping="0.001"/>
+
+  </joint>
+
+
+  <!-- ROS 2 Control -->
+  <ros2_control
+    name="GazeboSystem"
+    type="system">
+
+    <hardware>
+      <plugin>gz_ros2_control/GazeboSimSystem</plugin>
+    </hardware>
+
+    <joint name="rear_left_wheel_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="velocity"/>
+      <state_interface name="position"/>
+    </joint>
+
+    <joint name="rear_right_wheel_joint">
+      <command_interface name="velocity"/>
+      <state_interface name="velocity"/>
+      <state_interface name="position"/>
+    </joint>
+
+    <joint name="left_wheel_steering_joint">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+    </joint>
+
+    <joint name="right_wheel_steering_joint">
+      <command_interface name="position"/>
+      <state_interface name="position"/>
+    </joint>
+
+    <joint name="front_left_wheel_joint">
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+
+    <joint name="front_right_wheel_joint">
+      <state_interface name="position"/>
+      <state_interface name="velocity"/>
+    </joint>
+
+  </ros2_control>
+
+
+  <!-- Gazebo-Anbindung -->
+  <gazebo>
+
+    <plugin
+      filename="gz_ros2_control-system"
+      name="gz_ros2_control::GazeboSimROS2ControlPlugin">
+
+      <parameters>
+        $(find iot_car_description)/config/vehicle_v2_controllers.yaml
+      </parameters>
+
+    </plugin>
+
+  </gazebo>
+
+</robot>
