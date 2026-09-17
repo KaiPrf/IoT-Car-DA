@@ -1,255 +1,219 @@
 # Projekthandbuch
-\textauthor{Schueler XY}
+\textauthor{Chloe Pripfl}
 
 ## Entwicklungsplan
 
 ### Projektauftrag
 
-Hier beschreiben Sie die allgemeinen Informationen zu Ihrem Maturaprojekt. Hier beschreiben sie den Projektkontext, nämlich die Ausgangssituation und Problembeschreibung
+Im Rahmen der Diplomarbeit wird eine funktionsfähige Simulation eines IoT-Cars entwickelt. Ursprünglich war vorgesehen, das bereits vorhandene physische IoT-Car direkt weiterzuentwickeln. Da das Fahrzeug während des für die Umsetzung vorgesehenen Zeitraums nicht durchgehend zur Verfügung stand, wurde die praktische Umsetzung auf eine digitale Simulation verlagert.
+
+Die Simulation soll die wesentlichen Funktionen des ursprünglich geplanten Systems nachbilden. Dazu gehören ein steuerbares Fahrzeugmodell, Sensorik, eine zentrale Kommunikations- und Steuerungsstruktur sowie eine externe Benutzeroberfläche für Desktop-PC und Smartphone.
+
+Als technische Basis werden ROS 2 und Gazebo Sim eingesetzt. Die einzelnen Komponenten werden modular aufgebaut und über definierte Schnittstellen miteinander verbunden. Zusätzlich wird das Gesamtsystem in einer Docker-Umgebung bereitgestellt, um eine möglichst einfache und reproduzierbare Ausführung zu ermöglichen.
+
+### Projektziele
+
+Ziel des Projekts ist die Erstellung einer funktionsfähigen und nachvollziehbaren Simulationsplattform für ein IoT-Car.
+
+Die wichtigsten Projektziele sind:
+
+- Erstellung eines digitalen Fahrzeugmodells
+- Umsetzung von Antrieb und Ackermann-Lenkung
+- Integration einer Frontkamera
+- Integration eines frontseitigen Abstandssensors
+- Erfassung der Fahrzeuggeschwindigkeit
+- Kommunikation zwischen den Komponenten über ROS 2
+- Entwicklung einer zentralen Steuerungslogik
+- Erstellung einer webbasierten Benutzeroberfläche
+- Steuerung über Desktop-PC und Smartphone
+- Übertragung von Kamerabild und Telemetriedaten
+- Aufbau einer virtuellen Testumgebung in Gazebo Sim
+- Bereitstellung der Anwendung in einer Docker-Umgebung
+- nachvollziehbare Dokumentation der technischen Umsetzung
+
+Das Gesamtsystem soll so aufgebaut sein, dass die einzelnen Bestandteile unabhängig voneinander erweitert oder ausgetauscht werden können.
+
+### Nicht-Ziele bzw. nicht Inhalte
+
+Nicht Bestandteil des Projekts sind:
+
+- Entwicklung oder Fertigung eigener Fahrzeughardware
+- vollständiger Umbau des vorhandenen physischen IoT-Cars
+- Entwicklung eigener Kommunikationsprotokolle
+- sicherheitszertifizierte Fahrzeugsteuerung
+- vollständige autonome Navigation
+- komplexe Bildverarbeitung oder Objekterkennung
+- Optimierung für einen industriellen Produktiveinsatz
+- vollständige Abbildung aller möglichen IoT-Anwendungsfälle
+- industrielle Skalierung oder Hochverfügbarkeit
+
+Der Schwerpunkt liegt auf einer technisch nachvollziehbaren Simulation und nicht auf der Entwicklung eines marktreifen Produkts.
+
+### Projektnutzen
+
+Durch die Simulation kann die geplante IoT-Car-Architektur unabhängig von der Verfügbarkeit des physischen Fahrzeugs entwickelt und getestet werden. Dadurch ist es möglich, Steuerung, Sensorik, Kommunikation und Benutzeroberfläche in einer kontrollierten Umgebung gemeinsam zu untersuchen.
+
+Ein weiterer Vorteil besteht in der Reproduzierbarkeit. Das Fahrzeugmodell und die Testumgebung können jederzeit neu gestartet werden, ohne dass dafür ein reales Fahrzeug aufgebaut oder verfügbar sein muss. Änderungen an Software, Sensorik oder Steuerungsverhalten können dadurch schnell getestet werden.
+
+Die modulare Struktur erleichtert außerdem spätere Erweiterungen. Einzelne Komponenten können angepasst werden, ohne das gesamte System neu entwickeln zu müssen. Durch die Dockerisierung wird zusätzlich eine standardisierte Laufzeitumgebung geschaffen, wodurch die Simulation auf anderen geeigneten Systemen einfacher bereitgestellt werden kann.
 
 
-#### Projektziele
+### Projektauftraggeber
 
-Das Projektziel beschreibt den erwünschten Zustand (Sollzustand) nach dem erfolgreichen Abschluss des Projektes. Das Ziel wird wohlbedacht formuliert und durch aktives Handeln aller Projektbeteiligten erreicht. Projektziele sollten gemeinsam mit allen Projektbeteiligten erarbeitet werden.
+Auftraggeber dieser Diplomarbeit ist die HTL Leoben.
 
-#### Nicht-Ziele bzw. nicht Inhalte
+## Projektorganisation
 
-Nicht-Ziele sind aus mehreren Gründen wichtig. Erstens helfen sie beim Erwartungsmanagement. Zweitens schaffen sie Klarheit darüber, was erledigt werden soll. Und drittens erhöhen Nicht-Ziele die Transparenz. Denn wenn man schon früh im Projekt explizit die Bereiche definiert, die das Projekt nicht bearbeiten soll, kann dadurch eine Diskussion über genau diese Randbereiche entstehen. 
+### Projektbeteiligte
 
-#### Projektnutzen
+| Vorname | Nachname | Organisation | Kontaktinfos |
+|:--|:--|:--|:--|
+| Chloe | Pripfl | HTL Leoben | Telefonnummer: +43 660 5460451 |
 
-Wie soll ein Außenstehender ein Projekt genehmigen, wenn nicht klar formuliert ist, WARUM das Projekt überhaupt durchgeführt werden soll? Auch hier ist es wichtig, möglichst konkret zu werden. Einen Projektnutzen z.B. mit „neueste Technik“ zu bezeichnen, ist nicht ausreichend.
+## Projektrisiken
 
-#### Projektauftraggeber/in
-
-Hier beschreiben Sie wer der Projektauftraggeber ist. Falls es eine externe Firma ist können Sie hier eine kurze Beschreibung des Unternehmens (sofern Projektrelevant) einfügen.
-
-#### Projekttermine
-
-Welche Termine sind Fixtermine und was sollte an diesen Terminen stattfinden ? Beispiele hierfür sind z.B: Präsentationen, Projektende, Zwischenabgaben, fest eingeplante Besprechungen / Reviews (die auch Projektrelevant sind) die auf keinen Fall vergessen werden dürfen
-
-
-
-| Termin     | Inhalt                          |
-|-----------:|:--------------------------------|
-| 2020-12-24 | Weihnachten                     |
-| 20XX-12-24 | Projektstart                    |
-| 20XX-10-24 | Projektpräsentation             |
-| 20XX-10-24 | Erreichung Meilenstein I        |
-| 20XX-10-24 | Erste Zwischenpräsentation      |
-| 20XX-10-24 | Erreichung Meilenstein II       |
-| 20XX-10-24 | Erreichung Meilenstein III      |
-| 20XX-10-24 | Zweite Zwischenpräsentation     |
-| 20XX-10-24 | Abgabe Endversion an Betreuer   |
-| 20XX-10-24 | Abgabe Gebundene Version        |
-| 20XX-10-24 | ...                             |
-
-: Projektterminübersicht
-
-
-#### Projektkosten
-
-Hier dokumentieren Sie welche Kosten fallen Für Ihr Projekt an und wer kommt für diese Kosten auf ?
-
-| Meilenstein  | Kostenart | Menge  | Preis   | Gesamtkosten | Deckung durch |
-|:-------------|:---------:|:------:|--------:|-------------:|---------------|
-| Prototyp     | Personal  |  10.00 |   15.00 | 150.00      | Schüler       |
-| Prototyp     | Hardware  |  1     |  254.00 | 254.00      | Projektpartner|
-| DA-Schreiben | Druck     |  3     |   26.00 |  53.00      | Schüler       |
-
- : Geplante Projektkosten
- 
-Am ende sollten Sie eine Projektkostensumme ermitteln und hier angeben damit man sagen kann
-__Das Projekt kostet in Summe so und so viel Euro__. 
-
-
-Am Ende der Diplomarbeit fügen Sie hier noch eine Liste der tatsächlich angefallenen Kosten ein.
-
-#### Projektrisiken
-
-Hier geben Sie an welche Risiken auf Ohr Projekt zutreffen können, und auch wie wahrscheinlich es ist das dieses Risiko eintritt.
-Eine Übersicht über Risiken finden sie hier: https://projekte-leicht-gemacht.de/blog/pm-in-der-praxis/130-projektrisiken-beispiele/
-
-Hier ein Beispiel:
-
-| Risiko         | EW  | Auswirkungen     | Maßnahmen     |
-|:--------------:|:---:| :----------------|:--------------|
-| Überziehen der Kosten | 15% | Erhöhte Kosten für Schüler | Budgetierung |
-| Ungenaue Schätzungen | 30% | Ungenaue Schätzungen führen zu Problem bezüglich Terminen und Budget. | Schätzungen mit Fachkollegen absprechen|
-| Verzögerungen beim Aufbau von Hard- und Software | 10% | Prototyp wird nicht rechtzeitig zur Endpräsentation fertig | Früh genug anfangen |
-
-: Projektrisiken
-
-### Projektorganisation
-
-#### Projektbeteiligte
-Hier wird definiert wer (welche Personen) an diesem Projekt beteiligt im Prinzip beteiligt ist.
-
-| Vorname     | Nachname     | Organisation | Kontaktinfos      |
-|:------------|:-------------|:-------------|:------------------|
-| Joltawan    | Barodscheff  | HTL Leoben   | jb@htl-leoben.at  |
-| Frank       | Borland      | Firma XY     | frank@borla.nd    |
-| ...         | ...          | ...          | ...               |
-
-: Projektbeteiligte
-
-Unter Kontaktinfos können neben der Emailadresse natürlich auch noch andere Informationen wie Telefonnunmmer, Postanschrift, usw. stehen. ... Im Prinzip alles was notwendig ist um die Person zu erreichen wenn es notwendig ist. 
-
-#### Projektrollen
-
-Hier werden den Kontakten von oben konkrete Rollen zuewiesen.
-
-| Projektrolle           | Rollenbeschreibung     | Name              |
-|------------------------|------------------------|-------------------|
-| Projektleiter | Verantwortlicher für Einhaltung des Projektrahmens | Joltawan Barodscheff |
-| Auftraggeber | Auftraggeber der internen Diplomarbeit | Frank Borland |
-| Betreuer | Schulischer Betreuer | G. Hutter |
-| Betreuer | Schulischer Betreuer | A. Poetscher |
-
-: Projektrollen
-
-Gerne können Sie hier auch noch zusätzlich eine Grafik oder ein Organisationsdiagramm einbauen.
-
-![Projektorganisationsdiagramm](img/projektorganisation.png){width=50%}
-
-### Vorgehen bei Änderungen
-
-Hier dokumentieren sie betreffend des Meilensteinplans oder der Anwendungsfälle: 
-
-* Wer wird informiert, 
-* wer muss zustimmen, 
-* wo werden die Änderungen wie vermerkt?
-
-Das dient in erster Linie dazu um ein einheitliches Vorgehen definiert zu haben.
-
-## Meilensteine
-
-Der Begriff taucht im Projektmanagement sehr häufig auf. Meilensteine sind wichtige Punkte im Projektverlauf. Oft werden sie auch als Prüfpunkte bezeichnet.
-
-Generell kann ein Meilenstein ein Ereignis sein, an dem
-
-* etwas abgeschlossen ist,
-* etwas begonnen wird oder
-* über die weitere Vorgehensweise entschieden wird
-
-Meilensteine werden meist am Ende von Projektphasen definiert. Auch innerhalb von Phasen kann es zusätzliche Meilensteine geben.
-
-Meilensteine verlaufen nie über eine Zeitdauer. Nie. Sie sind lediglich Entscheidungspunkte
-
-Hier ein Beispiel wie die Meilensteine im Fall einer aussehen können
-
-### 2020-09-15: Projektmanagement abgeschlossen
-
-- Projekthandbuch ist fertig
-- Serverinfrastruktur ist hergestellt
-- Bestellungen sind abgessendet
-
-### 2020-11-01: Genehmigung der DA
-
-- Einreichen des Antrags durch die Schüler/innen
-- DA Dokumentation wurde ausgefüllt und unterschrieben
-
-### 2020-11-26: Literaturrecherche abgeschlossen
-
-- Literatur zum Thema XY gesucht und in bibtex vermerkt
-- Aktellen Stand der Forschung erhoben
-- Verschriftlichung des Literaturteils begonnen 
-
-### 2020-12-17: Prototyp ist funktionell
-
-- DB mit Tabelle für Benutzer.
-- DB Kommunikation zur Anwendung (inkl. Dokumentation)
-- Es gibt in der Anwendung einen /Admin/ Benutzer. Dieser Benutzer kann weitere Benutzer in den Rollen /Lehrende/ und bzw. oder /Studierende/ anlegen.
-      
-### 2021-01-10: Applikation fertiggestellt
-
-- Lehrende sind dazu in der Lage Tests anzulegen.
-- Studenten können einen ihnen zugewiesenen Test absolvieren.
-
-### 2021-01-10: Review und Überarbeitung fertig
-
-- Der Quellcode ist gemeinsam mit den Projektpartnern reviewt
-- Quellcodedokumentation abgeschlossen (Javadoc)
-- Projekt baut auf eigenem Buildserver (Continous Integration)
-
-### 2021-02-03: Diploarbeit fertig verschriftlicht 
-
-- Stilfehler sind behoben
-- DA Dokumentationsblatt ist unterschrieben, eingescannt und im Hauptdokument enthalten 
-- Praxisteil ist ebgeschlossen und verschriftlicht
-- Informationen sind im DA Portal eingegeben
-- Unterschriebene DA Betreuungsprotokolle sind in der DA enthalten
-- DA liegt dem Betreuer in ausgedruckter Form vor
-    
+| Risiko | Auswirkung | Maßnahme |
+|:--|:--|:--|
+| Physisches IoT-Car steht nicht zur Verfügung | Ursprünglich geplante Entwicklung am realen Fahrzeug kann nicht durchgeführt werden | Verlagerung der Umsetzung auf eine digitale Simulation |
+| Unzureichende Simulationsperformance | Instabiles Fahrverhalten, verzögerte Sensorwerte oder niedrige Bildrate | Optimierung der Simulationsparameter und Nutzung von GPU-Unterstützung |
+| Fehlerhafte Fahrzeugphysik | Unnatürliches Fahr- oder Lenkverhalten | Schrittweise Anpassung von Fahrzeuggeometrie, Gelenken, Dämpfung und Controllerparametern |
+| Probleme bei der Sensorintegration | Kamera- oder Distanzdaten werden fehlerhaft oder nicht bereitgestellt | Sensoren getrennt testen und Daten über ROS-2-Topics kontrollieren |
+| Netzwerkprobleme zwischen WSL, Docker und Endgeräten | Weboberfläche ist von Smartphone oder PC nicht erreichbar | Netzwerkpfade getrennt testen und Portfreigaben kontrollieren |
+| Abhängigkeiten zwischen ROS 2, Gazebo und ros2_control | Komponenten starten nicht oder sind untereinander inkompatibel | Verwendung einer fest definierten Softwareumgebung und anschließende Dockerisierung |
+| Fehler in der webbasierten Steuerung | Steuerbefehle oder Telemetriedaten werden nicht korrekt übertragen | WebSocket-Verbindungen und Eingabeverarbeitung getrennt testen |
 
 ## Anwendungsfälle
 
-Hier beschreiben Sie die Anwendungsfälle (=UseCases) Ihrer Anwendung / Diplomarbeit. Dabei sollte die Beschreibung auf hohem Niveau (also ohne implementierungsspezifische Details) erfolgen und typischerweise so benannt sein, wie die Ziele aus Sicht der Akteure heißen: Mitglied anmelden, Geld abheben, Auto zurückgeben.
-
-Jeder Anwendungsfall wird im selben Muster beschrieben. In den folgenden Absätzen ist zuerst eine allgemeine Beschreibung eines solchen Anwendungsfalls zu finden und dann ein Beispiel dazu.
-
-Damit man auch versteht wer mit welchem Anwendungsfall agiert bietet es sich an hier eine Übersichtsgrafik zu erstellen:
-
-![Übersicht Anwendungsfälle](img/anwendungsfalldiagramm.png){width=60%}
-
-\newpage
-### Anwendungsfallname
-Anwendungsfälle haben einen eindeutigen Namen aus dem man auf den Inhalt des Anwendungsfalls schließen kann. Wenn Sie agil arbeiten dann stellt ein Anwendungsfall eine UserStory dar welche im Backlog liegt und im Laufe des Projekts (in einem Sprint) abgearbeitet wird.
+### Fahrzeug steuern
 
 #### Kurzbeschreibung
-Hier erfolgt eine kurze Beschreibung, was im Anwendungsfall passiert. Kurz bedeutet, dass es zwei oder drei Zeilen sind, selten mehr.
-      
+
+Der Benutzer steuert das simulierte IoT-Car über die Weboberfläche. Dabei können Beschleunigung, Bremsen und Lenkung beeinflusst werden.
+
 #### Trigger
-Der fachliche Grund bzw. die Gründe dafür, dass dieser Anwendungsfall ausgeführt 
+
+Der Benutzer öffnet die Steuerungsoberfläche und gibt einen Fahrbefehl ein.
 
 #### Vorbedingung
-Alle Bedingungen, die erfüllt sein müssen, damit dieser Anwendungsfall ausgeführt werden kann. Gibt es keine Vorbedingungen, so steht hier "keine".
-      
+
+Die Simulation, die ROS-2-Komponenten und der Webserver sind gestartet.
+
 #### Nachbedingung
-Der Zustand, der nach einem erfolgreichen Durchlauf des Anwendungsfalls erwartet wird.
+
+Das Fahrzeug reagiert auf die Eingabe und bewegt beziehungsweise lenkt entsprechend des Steuerbefehls.
 
 #### Akteure
-Akteure sind beteiligte Personen oder Systeme außerhalb (!) des beschriebenen Systems. Z. B. Anwender, angemeldeter Anwender, Kunde, System, Abrechnungsprozess.
+
+- Benutzer
+- Weboberfläche
+- Steuerungslogik
+- Fahrzeugsimulation
 
 #### Standardablauf
-Hier wird das typische Szenario dargestellt, das leicht zu verstehen oder der am häufigsten vorkommende Fall ist. An seinem Ende steht die Zielerreichung des Primärakteurs. Die Ablaufschritte werden nummeriert und meist in strukturierter Sprache beschrieben. Ablaufpläne können jedoch ebenfalls benutzt werden, wenn es angebracht erscheint. Mittels der UML können diese Ablaufschritte in Aktivitätsdiagrammen oder Anwendungsfall-orientierten Sequenzdiagrammen dargestellt werden.
+
+1. Der Benutzer öffnet die Steuerungsoberfläche.
+2. Der Benutzer gibt einen Lenk-, Gas- oder Bremsbefehl ein.
+3. Die Weboberfläche überträgt die Eingabe an das System.
+4. Die Steuerungslogik verarbeitet den Befehl.
+5. Der Fahrzeugcontroller setzt den Befehl in der Simulation um.
+6. Das Fahrzeug verändert Geschwindigkeit oder Fahrtrichtung.
 
 #### Fehlersituationen
-Dies sind Szenarien, die sich außerhalb des Standardablaufs auch bei der (versuchten) Zielerreichung des Anwendungsfalls ereignen können. Sie werden meistens als konditionale Verzweigungen der normalen Ablaufschritte dargestellt. An ihrem Ende steht ein Misserfolg, die Zielerreichung des Primärakteurs oder eine Rückkehr zum Standardablauf.
+
+- Verbindung zur Simulation ist unterbrochen.
+- Steuerbefehle werden nicht innerhalb der vorgesehenen Zeit empfangen.
+- Der Fahrzeugcontroller ist nicht aktiv.
 
 #### Systemzustand im Fehlerfall
-Der Zustand, der nach einem erfolglosen Durchlauf des Anwendungsfalls erwartet wird.
 
+Das Fahrzeug erhält keine neuen Fahrbefehle und wird nicht weiter aktiv beschleunigt.
 
-\newpage
-### Benutzer Anlegen
+### Kamerabild anzeigen
 
 #### Kurzbeschreibung
-Der Benutzer "Admin" kann auf Anfrage einen neuen Benutzer als "Lehrende" und bzw. oder "Studierende" anlegen
+
+Der Benutzer kann das von der simulierten Frontkamera erzeugte Bild direkt in der Weboberfläche betrachten.
 
 #### Trigger
-Admin legt auf Anfrage eines Benutzers einen neuen Account an
+
+Der Benutzer öffnet die Steuerungsoberfläche.
 
 #### Vorbedingung
-Benutzer als "Admin" angemeldet
-      
+
+Die Simulation und der Kamerasensor sind aktiv.
+
 #### Nachbedingung
-Es existiert ein Eintrag in der DB Benutzer Tabelle für den neu erstellten Benutzer. (Dieser kann sich anschließend in der Anwendung anmelden)
+
+Das aktuelle Kamerabild wird in der Weboberfläche dargestellt.
 
 #### Akteure
-* Admin
+
+- Benutzer
+- Gazebo-Kamera
+- ROS 2
+- Webserver
+- Weboberfläche
+
+#### Standardablauf
+
+1. Die simulierte Kamera erzeugt Bilddaten.
+2. Die Bilddaten werden über ROS 2 bereitgestellt.
+3. Der Webserver verarbeitet die aktuellen Kamerabilder.
+4. Die Daten werden über eine WebSocket-Verbindung an den Browser übertragen.
+5. Das Bild wird in der Benutzeroberfläche dargestellt.
 
 #### Fehlersituationen
-Admin bricht die Aktion ab
+
+- Kamerasensor liefert keine Bilddaten.
+- WebSocket-Verbindung wird unterbrochen.
+- Webserver ist nicht erreichbar.
 
 #### Systemzustand im Fehlerfall
-Benutzer wird nicht angelegt und wird verworfen
 
-#### Standardablauf:
+Die Fahrzeugsteuerung kann weiterhin verfügbar sein, das Kamerabild wird jedoch nicht oder nicht aktuell dargestellt.
 
-1. Admin drückt Button, um einen neuen Benutzer anzulegen
-2. Es öffnet sich ein Formular, indem die nötigen Benutzer-Informationen eingegeben werden (Name, Adresse, Telephonnummer, E-Mail, Geburtsdatum, Passwort-Hash, Rolle). Der neue Benutzer muss mindestens einer der Rollen "Lehrende" und "Studierende" angehören
+### Telemetriedaten anzeigen
 
-#### Alternativabläufe:
+#### Kurzbeschreibung
 
-* Admin drückt den Button, um die Aktion abzubrechen 
+Geschwindigkeit und Abstand zum nächsten Hindernis werden während der Fahrt in der Weboberfläche dargestellt.
+
+#### Trigger
+
+Die Simulation ist aktiv und erzeugt Sensor- beziehungsweise Fahrzeugdaten.
+
+#### Vorbedingung
+
+Geschwindigkeits- und Abstandsauswertung sind gestartet.
+
+#### Nachbedingung
+
+Die aktuellen Messwerte werden in der Weboberfläche angezeigt.
+
+#### Akteure
+
+- Geschwindigkeitssensor
+- Abstandssensor
+- ROS 2
+- Webserver
+- Weboberfläche
+- Benutzer
+
+#### Standardablauf
+
+1. Die Simulation stellt die benötigten Rohdaten bereit.
+2. Die ROS-2-Nodes verarbeiten die Daten.
+3. Geschwindigkeit und Abstand werden auf eigenen Topics veröffentlicht.
+4. Der Webserver empfängt die aktuellen Werte.
+5. Die Werte werden an die Weboberfläche übertragen.
+6. Der Benutzer sieht die aktuellen Telemetriedaten.
+
+#### Fehlersituationen
+
+- Sensordaten fehlen oder sind ungültig.
+- Verbindung zwischen ROS 2 und Webserver ist unterbrochen.
+- WebSocket-Verbindung zum Browser ist nicht aktiv.
+
+#### Systemzustand im Fehlerfall
+
+Die betroffenen Messwerte werden nicht aktualisiert beziehungsweise als ungültig behandelt.

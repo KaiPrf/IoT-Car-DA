@@ -1,49 +1,62 @@
 # Zielsetzung
 \textauthor{Chloe Pripfl}
 
-
-
-
-
-
-
 ## Motivation der Arbeit
 
-Die Motivation für diese Diplomarbeit ergibt sich aus der zunehmenden Relevanz von und IoT-Technologien in Alltag, Industrie und Ausbildung. Gleichzeitig zeigt sich, dass der Einstieg in diese Themenbereiche aufgrund der Vielzahl an Technologien, Frameworks und Schnittstellen komplex ist. Besonders im schulischen Umfeld fehlt häufig eine praxisnahe, strukturierte Umsetzung, die Theorie und Praxis sinnvoll miteinander verbindet.
+Die Motivation für diese Diplomarbeit ergibt sich aus der zunehmenden Bedeutung vernetzter Systeme und IoT-Technologien in Alltag, Industrie und Ausbildung. Gleichzeitig zeigt sich, dass der Einstieg in diese Themenbereiche durch die Vielzahl an Technologien, Frameworks und Schnittstellen schnell komplex werden kann.
 
-Diese Arbeit soll zeigen, wie moderne Automatisierungs- und IoT-Konzepte verständlich aufgebaut, praktisch umgesetzt und systematisch dokumentiert werden können. Durch die Aufteilung in mehrere Teilbereiche und Ausarbeitungen wird außerdem die Zusammenarbeit verschiedener technischer Disziplinen realitätsnah abgebildet.
+Als Praxisbeispiel dient ein bereits vorhandenes IoT-Car. Ursprünglich war vorgesehen, dieses Fahrzeug direkt weiterzuentwickeln und dessen Sensorik, Steuerung und Kommunikation praktisch umzusetzen. Da das Fahrzeug über den Sommer nicht zur Verfügung gestellt werden konnte, war eine kontinuierliche Entwicklung und Erprobung am realen System jedoch nicht möglich.
 
+Aus diesem Grund wurde die praktische Umsetzung auf eine digitale Simulation verlagert. Dadurch können die wesentlichen Funktionen des geplanten Systems unabhängig von der Verfügbarkeit der physischen Hardware entwickelt und getestet werden.
+
+Die Simulation soll zeigen, wie Fahrzeugsteuerung, Sensorik, Kommunikation und eine externe Benutzeroberfläche zu einem modularen Gesamtsystem verbunden werden können. Ein besonderer Schwerpunkt liegt auf ROS 2 als Kommunikations- und Steuerungsbasis sowie auf Gazebo Sim für die virtuelle Abbildung des Fahrzeugs und seiner Umgebung.
 
 ## Ziel der Diplomarbeit
 
-Ziel der Diplomarbeit ist die Konzeption, Umsetzung und Dokumentation eines modularen IoT-Gesamtsystems anhand eines praxisnahen Projekte. Dabei soll ein funktionsfähige "IoT-Car" Simulation entstehen, das folgende Aspekte vereint:
+Ziel der Diplomarbeit ist die Konzeption, Umsetzung und Dokumentation einer modularen Simulation eines IoT-Cars. Das Fahrzeug soll in einer virtuellen Umgebung steuerbar sein, Sensordaten bereitstellen und über eine externe Benutzeroberfläche bedient werden können.
 
-- Erstellung einer digitalen Simulation eines "IoT-Car" mit allen dazugehöhrigen Sensoren
-- Nutzung standardisierter Kommunikationsprotokolle
-- Trennung von Hardware-, Kommunikations- und Steuerungsebene
-- Erstellung einer Kontrolloberfläche für die Simulation
-- Verständliche Dokumentation der theoretischen Grundlagen und der praktischen Umsetzung
+Im Rahmen der Arbeit sollen insbesondere folgende Ziele erreicht werden:
 
-Das System soll modular, erweiterbar und nachvollziehbar aufgebaut sein, sodass einzelne Komponenten unabhängig voneinander angepasst oder erweitert werden können.
+- Erstellung eines digitalen Fahrzeugmodells
+- Umsetzung von Antrieb und Ackermann-Lenkung
+- Integration einer Frontkamera
+- Integration eines frontseitigen Abstandssensors
+- Erfassung der Fahrzeuggeschwindigkeit
+- Kommunikation der einzelnen Komponenten über ROS 2
+- Entwicklung einer zentralen Steuerungslogik
+- Entwicklung einer webbasierten Kontrolloberfläche
+- Steuerung über Desktop-PC und Smartphone
+- Übertragung von Kamerabild und Telemetriedaten an die Benutzeroberfläche
+- Erstellung einer virtuellen Testumgebung in Gazebo Sim
+- Bereitstellung der Simulation in einer Docker-Umgebung
+- nachvollziehbare Dokumentation des technischen Aufbaus und der praktischen Umsetzung
 
-
+Das Gesamtsystem soll modular aufgebaut sein, sodass Fahrzeugmodell, Sensorik, Steuerung und Benutzeroberfläche möglichst unabhängig voneinander angepasst oder erweitert werden können.
 
 ## Nicht-Ziele der Diplomarbeit
 
-Die Diplomarbeit verfolgt bewusst nicht das Ziel, ein marktreifes oder industriell zertifiziertes Smart-Home-Produkt zu entwickeln. Ebenso wenig sollen folgende Punkte erreicht werden:
+Die Diplomarbeit verfolgt bewusst nicht das Ziel, ein marktreifes oder industriell zertifiziertes Fahrzeugsteuerungssystem zu entwickeln. Der Schwerpunkt liegt auf einer funktionsfähigen und nachvollziehbaren Simulation.
 
-- Entwicklung eines vollständig kommerziellen verwendebaren "IoT-Roboters"
-- Umsetzung eines sicherheitszertifizierten Systems für den produktiven Einsatz  
-- Vollständige Abdeckung aller IoT-Anwendungsfälle  
-- Optimierung auf maximale Performance oder industrielle Skalierung  
-- Entwicklung eigener Hardware oder eigener Kommunikationsprotokolle  
+Nicht Bestandteil der Arbeit sind daher:
 
-Der Fokus liegt auf einer didaktisch sinnvollen, technisch korrekten und nachvollziehbaren Umsetzung im Rahmen einer schulischen Diplomarbeit.
+- Entwicklung oder Fertigung eigener Fahrzeughardware
+- vollständiger Umbau oder Wiederaufbau des vorhandenen physischen IoT-Cars
+- Entwicklung eigener Kommunikationsprotokolle
+- sicherheitszertifizierte Steuerung für reale Fahrzeuge oder Maschinen
+- vollständige autonome Navigation
+- komplexe Bildverarbeitung oder Objekterkennung
+- Optimierung auf maximale Simulationsleistung
+- industrielle Skalierung oder Hochverfügbarkeitsanforderungen
+- vollständige Abbildung aller möglichen IoT-Anwendungsfälle
 
-
+Die entwickelte Lösung dient in erster Linie als technisches Demonstrations- und Lernsystem.
 
 ## Veränderung durch diese Arbeit
 
-Durch die Erstellung dieser Diplomarbeit verändert sich der Projektstand grundlegend. Aus einzelnen, losen Experimenten entsteht ein strukturiertes Gesamtsystem mit klar definierten Rollen, Schnittstellen und Verantwortlichkeiten. Die theoretischen Grundlagen werden gezielt mit der praktischen Umsetzung verknüpft, wodurch ein nachhaltiges Verständnis der eingesetzten Technologien entsteht.
+Durch diese Arbeit wird aus einem ursprünglich hardwarebezogenen IoT-Car-Projekt eine reproduzierbare und modular aufgebaute Simulationsplattform.
 
-Darüber hinaus liefert die Arbeit eine umfassende Dokumentation, die es ermöglicht, das Projekt nachzuvollziehen, zu reproduzieren und weiterzuentwickeln. Die Ergebnisse können als Grundlage für zukünftige Erweiterungen, Folgeprojekte oder weiterführende Arbeiten im Bereich IoT und Automatisierung dienen.
+Das Fahrzeug, seine Sensorik und die Steuerung können unabhängig von der realen Hardware ausgeführt und getestet werden. Die einzelnen Funktionen werden dabei in mehrere klar getrennte Komponenten aufgeteilt. Dazu gehören das Fahrzeugmodell, die Gazebo-Simulation, ROS-2-Nodes zur Verarbeitung von Steuer- und Sensordaten, die Weboberfläche sowie die Docker-Umgebung.
+
+Durch die Weboberfläche kann das simulierte Fahrzeug von einem Desktop-PC oder Smartphone aus gesteuert werden. Gleichzeitig werden Kamerabild, Geschwindigkeit und Abstandsdaten dargestellt. Dadurch entsteht eine direkte Verbindung zwischen Simulation, Sensorik und externer Bedienung.
+
+Die Dockerisierung verbessert zusätzlich die Reproduzierbarkeit des Projekts, da die für die Simulation benötigte Softwareumgebung gemeinsam mit dem Projekt bereitgestellt werden kann. Dadurch kann die Arbeit später leichter nachvollzogen, getestet und erweitert werden.

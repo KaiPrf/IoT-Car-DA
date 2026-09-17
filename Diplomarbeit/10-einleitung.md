@@ -1,13 +1,22 @@
 # Einleitung
 \textauthor{Chloe Pripfl}
 
-Die Bezeichnung IoT oder "Internet of Things" beschreibt ein Netzwerk verbunder Geräte. Welche mithilfe von beispielsweise Sensoren, Daten erhalten und diese miteinander Teilen. Was zu einer Effizienssteigerung führt und einem Automatisierungsmöglichkeiten bietet.[@WhatIsIoT].
+Das Internet of Things (IoT) beschreibt die Vernetzung physischer oder virtueller Geräte, die mithilfe von Sensoren Daten erfassen, austauschen und verarbeiten können. Dadurch lassen sich Abläufe automatisieren und Informationen zwischen unterschiedlichen Systemen bereitstellen. [@WhatIsIoT]
 
-![Example of an IoT system\label{fig:IoT-System-Example}](img/iot_system.png) 
-Abbildung \ref{fig:IoT-System-Example} [@WhatIsIoT] ist ein Beispiel für ein IoT System.
+![Example of an IoT system\label{fig:IoT-System-Example}](img/iot_system.png)
 
-In der Industrie ist IoT, dort oft als IIot, sprich "Industrial Internet of Things", bereits weit als Teil der Industrie 4.0 verbreitet [@IIoT]. Die Verschiedenen Use-Cases welche man mit IIoT angehen kann kann man hier nachlesen [@IoTUseCase]. 
+Abbildung \ref{fig:IoT-System-Example} zeigt beispielhaft den grundlegenden Aufbau eines IoT-Systems. [@WhatIsIoT]
 
-Auch in der Heimautomatisierung ist IoT bereits ein Hauptbestandteil. Es erlaubt einem Heizung, Sicherheitsysteme, Belichtung usw. mit einem Endgerät aus zu Steuern. Jedoch ist die Interoperabilität vieler Geräte dieser Branche immer noch weiterhin ein Problem für nicht technisch versierte Menschen [@IoTHomeAutomation].
+Auch in der Industrie spielt IoT eine wichtige Rolle. In diesem Zusammenhang wird häufig vom Industrial Internet of Things (IIoT) gesprochen. Dabei werden Maschinen, Sensoren und Softwaresysteme miteinander vernetzt, um Betriebsdaten zu erfassen, Prozesse zu überwachen und Automatisierung zu ermöglichen. [@IIoT]
 
-Im Zuge der Diplomarbeit [HIER TITEL] wird ein "IoT-Car" simuliert um Verschiedene IoT-Aspekte zu betrachten und als Praxisbeispiel darzustellen. Im Fokus steht dabei die Anbindung und Auswertung von Sensoren sowie die Kommunikation und Steuerung mit einen externen Endgerät.
+Die möglichen Anwendungsbereiche sind vielfältig und reichen von der Zustandsüberwachung über vernetzte Produktionsanlagen bis hin zu intelligenten Steuerungs- und Überwachungssystemen. [@IoTUseCase]
+
+Auch im privaten Umfeld ist IoT weit verbreitet. Beispiele dafür sind vernetzte Heizungen, Beleuchtungssysteme, Sicherheitslösungen oder andere Smart-Home-Komponenten, die über ein Smartphone oder ein anderes Endgerät gesteuert werden können. [@IoTHomeAutomation]
+
+Im Rahmen dieser Diplomarbeit wird ein IoT-Car als praktisches Beispiel für ein vernetztes System betrachtet. Ursprünglich war vorgesehen, ein bereits vorhandenes physisches IoT-Car direkt weiterzuentwickeln. Da während des für die praktische Umsetzung notwendigen Zeitraums kein durchgehender Zugriff auf das Fahrzeug möglich war, wurde die Umsetzung auf eine digitale Simulation verlagert.
+
+Das Fahrzeug wird in Gazebo Sim als virtuelles Modell nachgebildet. ROS 2 übernimmt dabei die Kommunikation zwischen den einzelnen Komponenten. Neben der Fahrzeugsteuerung werden auch eine Frontkamera, ein Abstandssensor und eine Geschwindigkeitsauswertung integriert.
+
+Zusätzlich wird eine webbasierte Benutzeroberfläche entwickelt, über die das simulierte Fahrzeug von einem Desktop-PC oder Smartphone gesteuert werden kann. Gleichzeitig werden Kamerabild und Telemetriedaten angezeigt.
+
+Ziel ist es, die grundlegenden Prinzipien eines vernetzten IoT-Systems anhand einer funktionsfähigen und reproduzierbaren Simulation praktisch darzustellen. Dabei stehen insbesondere die Kommunikation zwischen mehreren Softwarekomponenten, die Verarbeitung von Sensorwerten sowie die Steuerung über ein externes Endgerät im Mittelpunkt.

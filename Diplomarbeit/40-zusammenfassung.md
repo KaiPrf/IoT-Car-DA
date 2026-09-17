@@ -1,14 +1,21 @@
 # Zusammenfassung
 
-Hier schreiben Sie gemeinsam eine Zusammenfassung der gesamten Arbeit, in der sie auf einigen (wenigen) Seiten nochmals die Aufgabenstellung und die durch Ihre Diplomarbeit gefundenen Resultate beschreiben, wobei in der auch auf den Entstehungsprozess, persönliche Erfahrungen, Probleme bei der Durchführung,Verbesserungsmöglichkeiten, mögliche Erweiterungen usw. eingegangen werden kann.
-War das Thema richtig gewählt, was wurde konkret erreicht, welche Punkte bliebenoffen und wie könnte von hier aus weitergearbeitet werden?
+Im Rahmen dieser Diplomarbeit wurde ein IoT-Car als vernetztes System untersucht und praktisch umgesetzt. Ursprünglich war vorgesehen, ein bereits vorhandenes physisches Fahrzeug direkt weiterzuentwickeln. Da während des notwendigen Entwicklungszeitraums kein durchgehender Zugriff auf das IoT-Car möglich war, wurde die praktische Umsetzung auf eine digitale Simulation verlagert.
 
-Dabei gehen Sie nicht ins Detail (dafür sind die Detailkapitel da) sondern beschreiben wie Ihre Teilaufgaben zur Lösung des Gesamtproblems beigetragen haben.
+Als Grundlage der Simulation wurden ROS 2 und Gazebo Sim eingesetzt. Das Fahrzeug wurde als eigenes digitales Modell aufgebaut und mit einer Ackermann-Lenkung sowie Hinterradantrieb ausgestattet. Zusätzlich wurden eine Frontkamera, ein frontseitiger Abstandssensor und eine Geschwindigkeitsauswertung integriert.
 
-Zum Schluss geben Sie noch einen Ausblick was die nächsten Schritte sein könnten und wo man bei Ihrer Arbeit anknüpfen könnte.
+Die Steuerung des Fahrzeugs erfolgt über eine eigene ROS-2-basierte Steuerungslogik. Neben der eigentlichen Fahrzeugbewegung wurden dabei auch Beschleunigung, Bremsverhalten, Lenkung und ein Not-Stopp berücksichtigt.
 
+Ein weiterer Schwerpunkt der Arbeit lag auf der externen Bedienung. Dafür wurde eine webbasierte Benutzeroberfläche entwickelt, die sowohl auf Desktop-PCs als auch auf Smartphones verwendet werden kann. Über diese Oberfläche lässt sich das Fahrzeug steuern, während gleichzeitig das Kamerabild, die aktuelle Geschwindigkeit und der Abstand zum nächsten Hindernis dargestellt werden.
 
+Die Kommunikation zwischen Browser und ROS 2 erfolgt über einen eigenen Webserver und WebSockets. Dadurch können Steuerbefehle sowie Telemetrie- und Kameradaten zwischen der Simulation und dem Endgerät übertragen werden.
 
-## Lesen und lesen lassen
+Während der Entwicklung traten mehrere technische Herausforderungen auf. Dazu gehörten unter anderem die zunächst unzureichende Simulationsperformance in einer virtuellen Maschine, Probleme mit dem Fahrverhalten des Fahrzeugmodells, die Positionierung und Auswertung der Sensoren sowie die Netzwerkkommunikation zwischen Windows, WSL2, Docker und mobilen Endgeräten.
 
-Wenn die Arbeit fertig ist, sollten Sie diese zunächst selbst nochmals vollständig undsorgfältig durchlesen, auch wenn man vielleicht das mühsam entstandene Produktlängst nicht mehr sehen möchte. Zusätzlich ist sehr zu empfehlen, auch einer weiterenPerson diese Arbeit anzutun – man wird erstaunt sein, wie viele Fehler man selbstüberlesen hat.
+Durch den Wechsel auf WSL2, Anpassungen an der Fahrzeugphysik, Änderungen an der Sensorverarbeitung sowie die Umstellung des Kamerastreams auf eine WebSocket-basierte Übertragung konnten diese Probleme schrittweise gelöst werden.
+
+Abschließend wurde das gesamte System in eine Docker-Umgebung übertragen. Dadurch können ROS 2, Gazebo, die Steuerungslogik, Sensorverarbeitung und der Webserver gemeinsam in einer definierten Laufzeitumgebung gestartet werden. Dies verbessert die Reproduzierbarkeit und erleichtert die spätere Weiterverwendung des Projekts.
+
+Das Ergebnis der Arbeit ist eine funktionsfähige und modular aufgebaute Simulationsplattform, welche die wesentlichen Funktionen des ursprünglich geplanten IoT-Cars abbildet. Fahrzeugsteuerung, Sensorik, Kommunikation und externe Bedienung konnten erfolgreich miteinander verbunden werden.
+
+Ein möglicher nächster Schritt besteht darin, die entwickelte Steuerungs- und Kommunikationsstruktur auf das reale IoT-Car zu übertragen. Eine zukünftige Diplomarbeit könnte die bestehende Weboberfläche und die bereits entwickelte ROS-2-Struktur aufgreifen und mit der physischen Hardware des Fahrzeugs verbinden. Dadurch könnte die in dieser Arbeit entwickelte Simulation als Grundlage für eine reale Umsetzung dienen.
