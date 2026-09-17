@@ -5,7 +5,7 @@
 
 ## Einleitung
 
-Im Rahmen dieser Diplomarbeit wird das vorhandene Konzept eines IoT-Cars als digitale Simulation umgesetzt. Ziel ist es, die wesentlichen Funktionen eines vernetzten Fahrzeugs unabhängig von der physischen Hardware nachvollziehbar abzubilden. Dazu gehören insbesondere die Fahrzeugbewegung, die Erfassung von Sensordaten, die Bereitstellung eines Kamerabildes sowie die Steuerung über ein externes Endgerät.
+Im Rahmen dieser Teilaufgabe wird das vorhandene Konzept eines IoT-Cars als digitale Simulation umgesetzt. Ziel ist es, die wesentlichen Funktionen eines vernetzten Fahrzeugs unabhängig von der physischen Hardware nachvollziehbar abzubilden. Dazu gehören insbesondere die Fahrzeugbewegung, die Erfassung von Sensordaten, die Bereitstellung eines Kamerabildes sowie die Steuerung über ein externes Endgerät.
 
 Die Simulation soll dabei nicht nur als vereinfachte Darstellung des realen Fahrzeugs dienen, sondern als eigenständig nutzbare Entwicklungs- und Testumgebung. Durch die Trennung der einzelnen Funktionen in mehrere ROS-2-Nodes können Sensorik, Steuerung und Benutzeroberfläche unabhängig voneinander entwickelt und getestet werden. Die Kommunikation zwischen den Komponenten erfolgt über standardisierte ROS-2-Schnittstellen.
 
@@ -134,7 +134,7 @@ Die Containerisierung reduziert die Anzahl manueller Installationsschritte auf e
 
 Die Entwicklung der Simulation erfolgt unter Windows mit WSL2. Innerhalb von WSL wird Ubuntu 26.04 eingesetzt. Als ROS-2-Version kommt ROS 2 Lyrical zum Einsatz. Die Simulation selbst wird mit Gazebo Sim ausgeführt.
 
-Für die grafische Beschleunigung kann die in WSL verfügbare GPU-Schnittstelle verwendet werden. Für die spätere Container-Version wurde zusätzlich die GPU-Nutzung innerhalb von Docker Desktop getestet.
+Für die grafische Beschleunigung kann die in WSL verfügbare GPU-Schnittstelle verwendet werden. Auf dem Entwicklungssystem steht dafür eine NVIDIA GeForce RTX 5070 Laptop GPU zur Verfügung. Für die spätere Container-Version wurde zusätzlich die GPU-Nutzung innerhalb von Docker Desktop getestet.
 
 Der ROS-2-Workspace befindet sich unter:
 
@@ -152,20 +152,20 @@ Die wichtigsten Projektbereiche sind dabei wie folgt strukturiert:
 
 ```text
 iot_car_ws/
-├── Dockerfile
-├── compose.yaml
-├── docker/
-├── src/
-│   └── iot_car_description/
-│       ├── config/
-│       ├── launch/
-│       ├── scripts/
-│       ├── urdf/
-│       ├── web/
-│       ├── worlds/
-│       ├── CMakeLists.txt
-│       └── package.xml
-└── tools/
+|-- Dockerfile
+|-- compose.yaml
+|-- docker/
+|-- src/
+|   `-- iot_car_description/
+|       |-- config/
+|       |-- launch/
+|       |-- scripts/
+|       |-- urdf/
+|       |-- web/
+|       |-- worlds/
+|       |-- CMakeLists.txt
+|       `-- package.xml
+`-- tools/
 ```
 
 Die Unterteilung trennt Robotermodell, Konfiguration, Python-Nodes, Weboberfläche, Simulationswelten und Startdateien voneinander.
@@ -329,11 +329,11 @@ Anschließend wird der Quellcode in das Image kopiert und der Workspace mit `col
 Die Datei `compose.yaml` beschreibt den eigentlichen Container. Dort werden unter anderem folgende Einstellungen definiert:
 
 ```text
-Image:        iot-car-sim:latest
-Container:    iot-car-sim
-Web-Port:     8080:8080
+Image:         iot-car-sim:latest
+Container:     iot-car-sim
+Web-Port:      8080:8080
 Shared Memory: 512 MB
-GPU:          aktiviert
+GPU:           aktiviert
 ```
 
 Für die Container-Version wird Gazebo ohne grafische Oberfläche gestartet. Der Aufruf verwendet Headless Rendering, sodass die virtuelle Kamera weiterhin gerendert wird, ohne ein Gazebo-Fenster anzuzeigen.
