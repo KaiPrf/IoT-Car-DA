@@ -301,6 +301,10 @@ Auf einem Desktop-PC kann die Steuerungsseite mit Tastatur und Maus verwendet we
 
 Neben dem Kamerabild werden Geschwindigkeit und Abstand eingeblendet. Dadurch stehen die wichtigsten Zustandsinformationen des simulierten Fahrzeugs direkt in derselben Oberfläche zur Verfügung.
 
+![Desktop-Steuerung der IoT-Car-Simulation\label{fig:Simulation-Steuerung-Computer}](img/SimulationSteuerungComputer.png)
+
+Abbildung \ref{fig:Simulation-Steuerung-Computer} zeigt die Steuerungsoberfläche der Simulation auf einem Desktop-PC.
+
 
 ### Smartphone-Steuerung
 
@@ -311,6 +315,10 @@ Auf der linken Seite befindet sich die Lenksteuerung. Die Position des Fingers w
 Zusätzlich kann die Anwendung in den Vollbildmodus geschaltet werden. Wenn der verwendete Browser und das Betriebssystem dies unterstützen, wird gleichzeitig versucht, die Bildschirmausrichtung auf Querformat zu setzen.
 
 Da die Steuerung vollständig im Browser ausgeführt wird, muss auf dem Smartphone keine zusätzliche Anwendung installiert werden. Befinden sich Computer und Smartphone im selben Netzwerk und ist Port 8080 erreichbar, kann die Steuerseite direkt über die IP-Adresse des Rechners geöffnet werden.
+
+![Smartphone-Steuerung der IoT-Car-Simulation\label{fig:Simulation-Steuerung-Handy}](img/SimulationSteuerungHandy.jpeg)
+
+Abbildung \ref{fig:Simulation-Steuerung-Handy} zeigt die für Smartphones optimierte Touch-Steuerung der Simulation.
 
 
 ### Netzwerk unter WSL2
