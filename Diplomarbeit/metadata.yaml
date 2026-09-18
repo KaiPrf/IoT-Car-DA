@@ -1,5 +1,5 @@
 ---
-da-titel: Erstellen einer Diplomarbeit mit LaTex
+da-titel: IoT-Car Simulation
 
 da-jahr: 2026 
 
@@ -16,30 +16,23 @@ da-author:
   thema: 
 
 da-betreuer:
-- paraffe: hg
-  name: Ing. DI(FH) Günther Hutter, Msc.
+- paraffe: LEIT
+  name: Dipl.-Wirt.-Ing. (FH) Christoph Leitner, BEd
 
-- paraffe: me
-  name: DI Dr. mont Thomas Messner
+- paraffe: ZAMA
+  name: DI (FH) Markus Zacharias
 
-da-kurzfassung-de: Hier kommt eine deutsche Kurzfassung hin.
+da-kurzfassung-de: Die Diplomarbeit beschäftigt sich mit der Umsetzung eines IoT-Cars als digitale Simulation. Ursprünglich war vorgesehen, ein bereits vorhandenes physisches Fahrzeug weiterzuentwickeln. Da während des notwendigen Entwicklungszeitraums kein durchgehender Zugriff auf das Fahrzeug möglich war, wurde die praktische Umsetzung auf eine Simulation mit ROS 2 und Gazebo Sim verlagert. Das virtuelle Fahrzeug verfügt über Ackermann-Lenkung, Hinterradantrieb, Frontkamera, Abstandssensor und Geschwindigkeitsmessung. Gesteuert wird es über eine selbst entwickelte Weboberfläche, die sowohl am PC als auch auf dem Smartphone verwendet werden kann. Kamerabild und Telemetriedaten werden dabei direkt im Browser dargestellt. Abschließend wurde das gesamte System in Docker containerisiert, um die Simulation möglichst einfach und reproduzierbar ausführen zu können.
 
-da-kurzfassung-en: Hier kommt eine englische Kurzfassung hin.
+da-kurzfassung-en: This diploma thesis focuses on the implementation of an IoT car as a digital simulation. Originally, the project was intended to further develop an existing physical vehicle. Since continuous access to the vehicle was not available during the required development period, the practical implementation was moved to a simulation based on ROS 2 and Gazebo Sim. The virtual vehicle includes Ackermann steering, rear-wheel drive, a front camera, a distance sensor and speed measurement. It is controlled through a custom-developed web interface that can be used on both desktop computers and smartphones. The camera stream and telemetry data are displayed directly in the browser. Finally, the entire system was containerized using Docker to make the simulation easier to reproduce and run.
 
-da-appendix:
-- abschnitt: Technische Dokumentation
-  pdf-file: pandoc-manual.pdf
-  seiten: 53-73
-
-- abschnitt: Betreuungsprotokolle
-  pdf-file: betreuungsprotokolle.pdf    
-
+da-appendix:  
 # Diplomarbeitsvereinbarungen müssen zum Schluss sein 
 
 - abschnitt: Diplomatbeitsvereinbarung Englisch
-  pdf-file: HTL-DA-Doku-EN.pdf
+  pdf-file: HTL_DA_Doku_EN_Pripfl.pdf
 
 - abschnitt: Diplomatbeitsvereinbarung Deutsch
-  pdf-file: HTL-DA-Doku-DE.pdf
+  pdf-file: HTL_DA_Doku_DE_Pripfl.pdf
   
 ---
