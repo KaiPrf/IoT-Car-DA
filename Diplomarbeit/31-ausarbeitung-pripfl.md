@@ -52,17 +52,19 @@ Im Gegensatz zu ROS 1 ist für die grundlegende Discovery zwischen den Teilnehme
 
 Für die Simulation werden unter anderem folgende Topics verwendet:
 
-| Topic | Inhalt |
-|:------|:-------|
-| `/cmd_vel` | Geschwindigkeits- und Lenkvorgaben für das Fahrzeug |
-| `/car/camera/image` | Bilddaten der simulierten Frontkamera |
-| `/car/camera/camera_info` | Kameraparameter der simulierten Kamera |
-| `/car/front_scan` | Messwerte des simulierten Distanzsensors |
-| `/car/distance` | Aufbereiteter Abstand zum nächsten Hindernis |
-| `/car/distance_valid` | Gültigkeitsstatus der Abstandsmessung |
-| `/car/speed` | Berechnete Geschwindigkeit in m/s |
-| `/car/speed_kmh` | Berechnete Geschwindigkeit in km/h |
-| `/control/input` | Eingaben der Benutzeroberfläche für Lenkung, Gas und Bremse |
+\begin{longtable}{p{0.35\textwidth} p{0.57\textwidth}}
+\textbf{Topic} & \textbf{Inhalt} \\
+\hline
+\texttt{/cmd\_vel} & Geschwindigkeits- und Lenkvorgaben für das Fahrzeug \\
+\texttt{/car/camera/image} & Bilddaten der simulierten Frontkamera \\
+\texttt{/car/camera/camera\_info} & Kameraparameter der simulierten Kamera \\
+\texttt{/car/front\_scan} & Messwerte des simulierten Distanzsensors \\
+\texttt{/car/distance} & Aufbereiteter Abstand zum nächsten Hindernis \\
+\texttt{/car/distance\_valid} & Gültigkeitsstatus der Abstandsmessung \\
+\texttt{/car/speed} & Berechnete Geschwindigkeit in m/s \\
+\texttt{/car/speed\_kmh} & Berechnete Geschwindigkeit in km/h \\
+\texttt{/control/input} & Eingaben der Benutzeroberfläche für Lenkung, Gas und Bremse \\
+\end{longtable}
 
 
 ### URDF und Xacro
@@ -193,12 +195,14 @@ Während der Entwicklung zeigte sich, dass eine zu hohe Dämpfung an den Radgele
 
 Die Konfiguration des Fahrzeugcontrollers befindet sich in `vehicle_v2_controllers.yaml`. Der Controller arbeitet mit folgenden geometrischen Grundwerten:
 
-| Parameter | Wert |
-|:----------|----:|
-| Radstand | 0,26 m |
-| Spurweite | 0,21 m |
-| Radradius | 0,055 m |
-| Controller-Aktualisierungsrate | 100 Hz |
+\begin{longtable}{p{0.55\textwidth} p{0.25\textwidth}}
+\textbf{Parameter} & \textbf{Wert} \\
+\hline
+Radstand & 0,26 m \\
+Spurweite & 0,21 m \\
+Radradius & 0,055 m \\
+Controller-Aktualisierungsrate & 100 Hz \\
+\end{longtable}
 
 Zusätzlich wird ein `joint_state_broadcaster` verwendet. Dieser stellt die aktuellen Gelenkzustände innerhalb von ROS 2 zur Verfügung.
 
@@ -212,9 +216,9 @@ Die eigentliche Eingabelogik wird im Node `game_control.py` umgesetzt. Der Node 
 Die Eingaben sind folgendermaßen aufgebaut:
 
 ```text
-axes[0]   Lenkung
-axes[1]   Gas
-axes[2]   Bremse
+axes[0]    Lenkung
+axes[1]    Gas
+axes[2]    Bremse
 buttons[0] Not-Aus
 ```
 
