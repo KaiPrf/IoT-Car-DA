@@ -1,3 +1,4 @@
+
 # Zusammenfassung
 
 Im Rahmen dieser Diplomarbeit wurde ein IoT-Car als vernetztes System untersucht und praktisch umgesetzt. Ursprünglich war vorgesehen, ein bereits vorhandenes physisches Fahrzeug direkt weiterzuentwickeln. Da während des notwendigen Entwicklungszeitraums kein durchgehender Zugriff auf das IoT-Car möglich war, wurde die praktische Umsetzung auf eine digitale Simulation verlagert.

@@ -11,6 +11,7 @@ Die Simulation soll die wesentlichen Funktionen des ursprünglich geplanten Syst
 
 Als technische Basis werden ROS 2 und Gazebo Sim eingesetzt. Die einzelnen Komponenten werden modular aufgebaut und über definierte Schnittstellen miteinander verbunden. Zusätzlich wird das Gesamtsystem in einer Docker-Umgebung bereitgestellt, um eine möglichst einfache und reproduzierbare Ausführung zu ermöglichen.
 
+
 ### Projektziele
 
 Ziel des Projekts ist die Erstellung einer funktionsfähigen und nachvollziehbaren Simulationsplattform für ein IoT-Car.
@@ -33,6 +34,7 @@ Die wichtigsten Projektziele sind:
 
 Das Gesamtsystem soll so aufgebaut sein, dass die einzelnen Bestandteile unabhängig voneinander erweitert oder ausgetauscht werden können.
 
+
 ### Nicht-Ziele bzw. nicht Inhalte
 
 Nicht Bestandteil des Projekts sind:
@@ -49,6 +51,7 @@ Nicht Bestandteil des Projekts sind:
 
 Der Schwerpunkt liegt auf einer technisch nachvollziehbaren Simulation und nicht auf der Entwicklung eines marktreifen Produkts.
 
+
 ### Projektnutzen
 
 Durch die Simulation kann die geplante IoT-Car-Architektur unabhängig von der Verfügbarkeit des physischen Fahrzeugs entwickelt und getestet werden. Dadurch ist es möglich, Steuerung, Sensorik, Kommunikation und Benutzeroberfläche in einer kontrollierten Umgebung gemeinsam zu untersuchen.
@@ -58,29 +61,60 @@ Ein weiterer Vorteil besteht in der Reproduzierbarkeit. Das Fahrzeugmodell und d
 Die modulare Struktur erleichtert außerdem spätere Erweiterungen. Einzelne Komponenten können angepasst werden, ohne das gesamte System neu entwickeln zu müssen. Durch die Dockerisierung wird zusätzlich eine standardisierte Laufzeitumgebung geschaffen, wodurch die Simulation auf anderen geeigneten Systemen einfacher bereitgestellt werden kann.
 
 
-### Projektauftraggeber
+### Projektauftraggeber/in
 
 Auftraggeber dieser Diplomarbeit ist die HTL Leoben.
+
 
 ## Projektorganisation
 
 ### Projektbeteiligte
 
-| Vorname | Nachname | Organisation | Kontaktinfos |
-|:--|:--|:--|:--|
-| Chloe | Pripfl | HTL Leoben | Telefonnummer: +43 660 5460451 |
+\begin{longtable}{p{0.18\textwidth} p{0.18\textwidth} p{0.25\textwidth} p{0.29\textwidth}}
+\textbf{Vorname} & \textbf{Nachname} & \textbf{Organisation} & \textbf{Kontaktinfos} \\
+\hline
+Chloe & Pripfl & HTL Leoben & Telefonnummer: [ergänzen] \\
+\end{longtable}
+
 
 ## Projektrisiken
 
-| Risiko | Auswirkung | Maßnahme |
-|:--|:--|:--|
-| Physisches IoT-Car steht nicht zur Verfügung | Ursprünglich geplante Entwicklung am realen Fahrzeug kann nicht durchgeführt werden | Verlagerung der Umsetzung auf eine digitale Simulation |
-| Unzureichende Simulationsperformance | Instabiles Fahrverhalten, verzögerte Sensorwerte oder niedrige Bildrate | Optimierung der Simulationsparameter und Nutzung von GPU-Unterstützung |
-| Fehlerhafte Fahrzeugphysik | Unnatürliches Fahr- oder Lenkverhalten | Schrittweise Anpassung von Fahrzeuggeometrie, Gelenken, Dämpfung und Controllerparametern |
-| Probleme bei der Sensorintegration | Kamera- oder Distanzdaten werden fehlerhaft oder nicht bereitgestellt | Sensoren getrennt testen und Daten über ROS-2-Topics kontrollieren |
-| Netzwerkprobleme zwischen WSL, Docker und Endgeräten | Weboberfläche ist von Smartphone oder PC nicht erreichbar | Netzwerkpfade getrennt testen und Portfreigaben kontrollieren |
-| Abhängigkeiten zwischen ROS 2, Gazebo und ros2_control | Komponenten starten nicht oder sind untereinander inkompatibel | Verwendung einer fest definierten Softwareumgebung und anschließende Dockerisierung |
-| Fehler in der webbasierten Steuerung | Steuerbefehle oder Telemetriedaten werden nicht korrekt übertragen | WebSocket-Verbindungen und Eingabeverarbeitung getrennt testen |
+Im Verlauf der Umsetzung können verschiedene technische Risiken auftreten. Die folgende Übersicht zeigt die wichtigsten Risiken, deren mögliche Auswirkungen und die vorgesehenen beziehungsweise umgesetzten Maßnahmen.
+
+\begin{longtable}{p{0.27\textwidth} p{0.31\textwidth} p{0.34\textwidth}}
+\textbf{Risiko} & \textbf{Auswirkung} & \textbf{Maßnahme} \\
+\hline
+
+Physisches IoT-Car steht nicht zur Verfügung &
+Die ursprünglich geplante Entwicklung am realen Fahrzeug kann nicht durchgeführt werden. &
+Verlagerung der praktischen Umsetzung auf eine digitale Simulation. \\
+
+Unzureichende Simulationsperformance &
+Instabiles Fahrverhalten, verzögerte Sensordaten oder eine niedrige Bildrate können die Entwicklung beeinträchtigen. &
+Optimierung der Simulationsparameter, Wechsel auf WSL2 und Nutzung der vorhandenen GPU-Unterstützung. \\
+
+Fehlerhafte Fahrzeugphysik &
+Das Fahrzeug verhält sich bei Beschleunigung oder Lenkung unnatürlich. &
+Schrittweise Anpassung von Fahrzeuggeometrie, Gelenken, Dämpfung und Controllerparametern. \\
+
+Probleme bei der Sensorintegration &
+Kamera- oder Distanzdaten werden fehlerhaft oder nicht bereitgestellt. &
+Sensoren getrennt testen und die Daten über ROS-2-Topics kontrollieren. \\
+
+Netzwerkprobleme zwischen WSL2, Docker und Endgeräten &
+Die Weboberfläche ist vom Smartphone oder Desktop-PC nicht erreichbar. &
+Netzwerkverbindungen getrennt testen sowie Portweiterleitung und Portfreigaben entsprechend konfigurieren. \\
+
+Abhängigkeiten zwischen ROS 2, Gazebo und ros2\_control &
+Einzelne Komponenten starten nicht oder sind untereinander nicht kompatibel. &
+Verwendung einer fest definierten Softwareumgebung und anschließende Dockerisierung des Gesamtsystems. \\
+
+Fehler in der webbasierten Steuerung &
+Steuerbefehle oder Telemetriedaten werden nicht korrekt übertragen. &
+WebSocket-Verbindungen und Eingabeverarbeitung getrennt testen und Fehler schrittweise eingrenzen. \\
+
+\end{longtable}
+
 
 ## Anwendungsfälle
 
@@ -128,6 +162,7 @@ Das Fahrzeug reagiert auf die Eingabe und bewegt beziehungsweise lenkt entsprech
 
 Das Fahrzeug erhält keine neuen Fahrbefehle und wird nicht weiter aktiv beschleunigt.
 
+
 ### Kamerabild anzeigen
 
 #### Kurzbeschreibung
@@ -171,6 +206,7 @@ Das aktuelle Kamerabild wird in der Weboberfläche dargestellt.
 #### Systemzustand im Fehlerfall
 
 Die Fahrzeugsteuerung kann weiterhin verfügbar sein, das Kamerabild wird jedoch nicht oder nicht aktuell dargestellt.
+
 
 ### Telemetriedaten anzeigen
 

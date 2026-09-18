@@ -25,6 +25,7 @@ Die Simulation bildet dabei die wesentlichen Komponenten eines vernetzten System
 Für die Umsetzung wird ROS 2 als zentrale Kommunikations- und Steuerungsplattform eingesetzt. Die Fahrzeug- und Umgebungssimulation erfolgt mit Gazebo Sim. Die einzelnen Bestandteile werden modular aufgebaut, sodass Fahrzeugmodell, Sensorik, Steuerung und Benutzeroberfläche unabhängig voneinander entwickelt und getestet werden können.
 
 Die Simulation stellt damit nicht nur eine Ersatzlösung für den fehlenden Zugriff auf das physische Fahrzeug dar, sondern schafft gleichzeitig eine reproduzierbare Entwicklungsumgebung. Die dabei entwickelte Steuerungs- und Kommunikationsstruktur kann später als Grundlage dafür dienen, die Funktionen auf das reale IoT-Car zu übertragen.
+
 ## Aufgabenstellung
 
 Im Rahmen der Diplomarbeit soll eine funktionsfähige Simulation eines ursprünglich physisch geplanten IoT-Cars entwickelt werden. Da das reale Fahrzeug während des für die Umsetzung vorgesehenen Zeitraums nicht durchgehend zur Verfügung stand, werden die geplanten Funktionen in einer virtuellen Entwicklungsumgebung umgesetzt.
